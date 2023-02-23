@@ -5,11 +5,11 @@ function PopularDreams() {
   const [mostViewedDream, setMostViewedDream] = useState(null);
 
   useEffect(() => {
-    fetch('/api/v1/dreams/most-liked')
+    fetch('http://localhost:8080/api/v1/dreams/most-liked')
       .then(response => response.json())
       .then(data => setMostLikedDream(data));
 
-    fetch('/api/v1/dreams/most-viewed')
+    fetch('http://localhost:8080/api/v1/dreams/most-viewed')
       .then(response => response.json())
       .then(data => setMostViewedDream(data));
   }, []);
@@ -20,16 +20,16 @@ function PopularDreams() {
       {mostLikedDream && (
         <div>
           <h3>Most Liked Dream:</h3>
-          <p>{mostLikedDream.title}</p>
-          <p>{mostLikedDream.description}</p>
+          <p>{mostLikedDream.dreamTitle}</p>
+          <p>{mostLikedDream.dreamDescription}</p>
           <p>Likes: {mostLikedDream.likes}</p>
         </div>
       )}
       {mostViewedDream && (
         <div>
           <h3>Most Viewed Dream:</h3>
-          <p>{mostViewedDream.title}</p>
-          <p>{mostViewedDream.description}</p>
+          <p>{mostViewedDream.dreamTitle}</p>
+          <p>{mostViewedDream.dreamDescription}</p>
           <p>Views: {mostViewedDream.views}</p>
         </div>
       )}
