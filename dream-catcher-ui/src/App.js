@@ -1,15 +1,19 @@
+import logo from './logo.svg';
 import './App.css';
 import AddDreamer from './components/AddDreamer';
 import Navbar from './components/Navbar';
-import PopularDreams from './PopularDreams';
-
+import PopularDreams from './components/PopularDreams';
 
 function App() {
   return (
-    <div>
-      <PopularDreams />
-      <Navbar/>
-      <AddDreamer/>
+    <div className="App">
+      <header className="App-header">
+        <div>
+          <PopularDreams />
+          <Navbar/>
+          <AddDreamer/>
+        </div>
+      </header>
     </div>
   );
 }
