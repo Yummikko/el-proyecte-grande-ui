@@ -3,6 +3,7 @@ import './App.css';
 import AddDreamer from './components/AddDreamer';
 import Navbar from './components/Navbar';
 import PopularDreams from './components/PopularDreams';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <div>
           <PopularDreams />
           <Navbar/>
+          <Login/>
           <AddDreamer/>
         </div>
       </header>
