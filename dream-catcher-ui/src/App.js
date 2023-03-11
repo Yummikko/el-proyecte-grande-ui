@@ -63,7 +63,7 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <nav className="navbar navbar-expand navbar-dark bg-dark ps-2">
           <Link to={"/"} className="navbar-brand">
             DreamCatcher
           </Link>
@@ -112,6 +112,11 @@ class App extends Component {
                 </Link>
               </li>
               <li className="nav-item">
+                <a href="/popular-dreams" className="nav-link">
+                  Popular Dreams
+                </a>
+              </li>
+              <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={this.logOut}>
                   LogOut
                 </a>
@@ -145,6 +150,7 @@ class App extends Component {
             <Route path="/mentor" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
             <Route path="/add-dreamer" element={<AddDreamer />} />
+            <Route path="/popular-dreams" element={<PopularDreams />} />
           </Routes>
         </div>
 
