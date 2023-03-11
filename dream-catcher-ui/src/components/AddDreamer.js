@@ -7,23 +7,6 @@ const AddDreamer = () => {
     email: "",
   })
 
-  const onClick= (e) => {
-    e.stopPropagation();
-    toggleShow()
-    saveDreamer()
-  }
-
-  const [show, setShow] = useState();
-
-  var buttonText = show ? "Restart" : "Add Dreamer";
-
-  function toggleShow() {
-    setShow(!show);
-  }
-
-  const isVisibleForm = () => {
-
-  }
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -31,7 +14,7 @@ const AddDreamer = () => {
   }
 
   const [data, setData] = useState()
-  const message = "Success"
+  const message = dreamer.nickname + " was successfully created."
 
   const saveDreamer = (e) => {
     e.preventDefault();
@@ -45,9 +28,9 @@ const AddDreamer = () => {
   }
 
   return (
-    <div className='flex max-w-2xl mx-auto shadow border-b'>
+    <div className='flex max-w-2xl mx-auto shadow border-b pb-2'>
       
-      {<div className='px-8 py-8'>
+      {<div className='p-2'>
         <div className='font-thin text-2xl tracking-wider'>
           <h1>Add Dreamer</h1>
         </div>
@@ -60,12 +43,12 @@ const AddDreamer = () => {
           <input type="text" className='h-10 w-96 border mt-2 px-2 py-2' name="email" value={dreamer.email} onChange={(e) => handleChange(e)}></input>
         </div>
         <div className='items-center justify-center h-14 w-full my-4'>
-          <button onClick={onClick} className='btn btn-success mb-3'>Add</button>
+          <button onClick={saveDreamer} className='btn btn-success mb-3'>Add</button>
           <button className='btn btn-danger mb-3 ms-1'>Clear</button>
         </div>
       </div>}
     {data && (
-      <div className='form-group'>
+      <div className='form-group m-1'>
         <div
           className={data ? 'alert alert-success' : 'alert alert-danger'}
           role='alert'
