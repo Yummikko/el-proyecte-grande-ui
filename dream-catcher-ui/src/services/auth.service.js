@@ -10,7 +10,7 @@ class AuthService {
       })
       .then(response => {
         if (response.data.accessToken) {
-          localStorage.setItem("dreamer", JSON.stringify(response.data));
+          localStorage.setItem("user", JSON.stringify(response.data));
         }
 
         return response.data;
@@ -18,7 +18,7 @@ class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("dreamer");
+    localStorage.removeItem("user");
   }
 
   register(username, email, password) {
@@ -30,7 +30,7 @@ class AuthService {
   }
 
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('dreamer'));;
+    return JSON.parse(localStorage.getItem('user'));;
   }
 }
 

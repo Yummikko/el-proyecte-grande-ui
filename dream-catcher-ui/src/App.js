@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AuthService from "./services/auth.service";
-import AuthVerify from "./common/auth-verify";
+import EventBus from "./common/EventBus";
 
 import Login from "./components/login.component";
 import Register from "./components/register.component";
@@ -34,11 +34,19 @@ class App extends Component {
 
     if (user) {
       this.setState({
-        currentUser: user.roles.includes("ROLE_DREAMER"),
+        currentUser: user,
         showModeratorBoard: user.roles.includes("ROLE_MENTOR"),
         showAdminBoard: user.roles.includes("ROLE_ADMIN"),
       });
     }
+    
+    EventBus.on("logout", () => {
+      this.logOut();
+    });
+  }
+
+  componentWillUnmount() {
+    EventBus.remove("logout");
   }
 
   logOut() {
@@ -68,7 +76,7 @@ class App extends Component {
 
             {showModeratorBoard && (
               <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
+                <Link to={"/mentor"} className="nav-link">
                   Mentor Board
                 </Link>
               </li>
@@ -84,10 +92,9 @@ class App extends Component {
 
             {currentUser && (
               <li className="nav-item">
-                <Link to={"/dreamer"} className="nav-link">
-                  Dreamer
+                <Link to={"/user"} className="nav-link">
+                  User
                 </Link>
-                <AddDreamer/>
               </li>
             )}
           </div>
@@ -97,6 +104,11 @@ class App extends Component {
               <li className="nav-item">
                 <Link to={"/profile"} className="nav-link">
                   {currentUser.username}
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/add-dreamer"} className="nav-link">
+                  Add Dreamer
                 </Link>
               </li>
               <li className="nav-item">
@@ -129,12 +141,14 @@ class App extends Component {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/dreamer" element={<BoardUser />} />
-            <Route path="/mod" element={<BoardModerator />} />
+            <Route path="/user" element={<BoardUser />} />
+            <Route path="/mentor" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
+            <Route path="/add-dreamer" element={<AddDreamer />} />
           </Routes>
         </div>
-        <AuthVerify logOut={this.logOut}/>
+
+        {/* <AuthVerify logOut={this.logOut}/> */}
       </div>
     );
   }
