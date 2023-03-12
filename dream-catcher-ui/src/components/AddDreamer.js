@@ -43,8 +43,8 @@ const AddDreamer = () => {
           <input type="text" className='h-10 w-96 border mt-2 px-2 py-2' name="email" value={dreamer.email} onChange={(e) => handleChange(e)}></input>
         </div>
         <div className='items-center justify-center h-14 w-full my-4'>
-          <button onClick={saveDreamer} className='btn btn-success mb-3'>Add</button>
-          <button className='btn btn-danger mb-3 ms-1'>Clear</button>
+          <button onClick={saveDreamer} className='btn btn-primary mb-3'>Add</button>
+          <button className='btn btn-info mb-3 ms-1'>Clear</button>
         </div>
       </div>}
     {data && (
