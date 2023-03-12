@@ -16,9 +16,11 @@ class HideShow extends Component {
     switch (name) {
       case "showHideFName":
         this.setState({ showHideFName: !this.state.showHideFName });
+        this.setState({ showHideMessage: false });
         break;
       case "showHideLName":
         this.setState({ showHideLName: !this.state.showHideLName });
+        this.setState({ showHideMessage: false });
         break;
       default: console.log(null);
     }
