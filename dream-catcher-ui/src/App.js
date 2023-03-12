@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import logo from './logo.svg';
 import AddDreamer from './components/AddDreamer';
+import FundDreamer from './components/FundDreamer';
 import PopularDreams from './components/PopularDreams';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -117,6 +118,11 @@ class App extends Component {
                 </a>
               </li>
               <li className="nav-item">
+                <a href="/donate-dreamer" className="nav-link">
+                  Donate Dreamer
+                </a>
+              </li>
+              <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={this.logOut}>
                   LogOut
                 </a>
@@ -151,6 +157,7 @@ class App extends Component {
             <Route path="/admin" element={<BoardAdmin />} />
             <Route path="/add-dreamer" element={<AddDreamer />} />
             <Route path="/popular-dreams" element={<PopularDreams />} />
+            <Route path="/donate-dreamer" element={<FundDreamer />} />
           </Routes>
         </div>
 
