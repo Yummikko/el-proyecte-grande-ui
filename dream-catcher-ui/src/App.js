@@ -17,6 +17,7 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-dreamer.component";
 import BoardModerator from "./components/board-mentor.component";
 import BoardAdmin from "./components/board-admin.component";
+import HideShow from "./components/HideShow";
 
 class App extends Component {
   constructor(props) {
@@ -123,6 +124,11 @@ class App extends Component {
                 </a>
               </li>
               <li className="nav-item">
+                <a href="/hide-show" className="nav-link">
+                  Hide and Show
+                </a>
+              </li>
+              <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={this.logOut}>
                   LogOut
                 </a>
@@ -158,6 +164,7 @@ class App extends Component {
             <Route path="/add-dreamer" element={<AddDreamer />} />
             <Route path="/popular-dreams" element={<PopularDreams />} />
             <Route path="/donate-dreamer" element={<FundDreamer />} />
+            <Route path="/hide-show" element={<HideShow />} />
           </Routes>
         </div>
 

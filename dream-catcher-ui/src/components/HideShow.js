@@ -5,68 +5,84 @@ class HideShow extends Component {
     super();
     this.state = {
       showHideFName: true,
-      showHideLName: true
+      showHideLName: true,
+      showHideMessage: false
     };
     this.hideComponent = this.hideComponent.bind(this);
+    this.hideAll = this.hideAll.bind(this);
   }
 
-  
   hideComponent(name) {
     switch (name) {
-      case "showHideNName":
+      case "showHideFName":
         this.setState({ showHideFName: !this.state.showHideFName });
         break;
-      case "showHideEmail":
+      case "showHideLName":
         this.setState({ showHideLName: !this.state.showHideLName });
         break;
-      default: console.log("null");
+      default: console.log(null);
     }
+  }
+
+  hideAll() {
+    this.setState({ showHideFName: !this.state.showHideFName });
+    this.setState({ showHideLName: !this.state.showHideLName });
+    this.setState({ showHideMessage: !this.state.showHideMessage });
   }
 
   render() {
-        const { showHideNName, showHideEmail } = this.state;
-        return (
-            <div>
-            <table>
-                {showHideNName && (
-                <tr>
-                    <td>Nick Name :</td>
-                    <td>
-                    <input type="text" id="nName" />
-                    </td>
-                </tr>
-                )}
-                {showHideEmail && (
-                <tr>
-                    <td>Email :</td>
-                    <td>
-                    <input type="text" id="email" />
-                    </td>
-                </tr>
-                )}
-                {showHideNName && showHideEmail && (
-                <tr>
-                    <td>
-                    <button>Submit</button>
-                    </td>
-                </tr>
-                )}
-                <tr>
-                <td>
-                    <button onClick={() => this.hideComponent("showHideNName")}>
-                    Hide Nick Name
-                    </button>
-                </td>
-                <td>
-                    <button onClick={() => this.hideComponent("showHideEmail")}>
-                    Hide Email
-                    </button>
-                </td>
-                </tr>
-            </table>
-            </div>
-        );
-    }
+    const { showHideFName, showHideLName, showHideMessage } = this.state;
+    return (
+      <div>
+        <table>
+          <tbody>
+          {showHideFName && (
+            <tr>
+              <td>First Name :</td>
+              <td>
+                <input type="text" id="fName" />
+              </td>
+            </tr>
+          )}
+          {showHideLName && (
+            <tr>
+              <td>Last Name :</td>
+              <td>
+                <input type="text" id="lName" />
+              </td>
+            </tr>
+          )}
+          {showHideFName && showHideLName && (
+            <tr>
+              <td>
+                <button onClick={() => this.hideAll()}>Submit</button>
+              </td>
+            </tr>
+          )}
+          {showHideMessage && (
+            <tr>
+              <td>
+                Success
+              </td>
+            </tr>
+          )}
+          <tr>
+            <td>
+              <button onClick={() => this.hideComponent("showHideFName")}>
+                Hide First Name
+              </button>
+            </td>
+            <td>
+              <button onClick={() => this.hideComponent("showHideLName")}>
+                Hide Last Name
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }
 
 export default HideShow;
