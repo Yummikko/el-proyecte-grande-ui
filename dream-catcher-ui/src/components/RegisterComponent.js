@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Form from "react-validation/build/form";
+import Select from "react-validation/build/select";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 
-import AuthService from "../services/auth.service";
+import AuthService from "../services/AuthService";
 
 const required = value => {
   if (!value) {
@@ -46,6 +47,19 @@ const vpassword = value => {
   }
 };
 
+const vrole = value => {
+  const roles = ["Dreamer", "Mentor"]
+  if (!roles.includes(value)) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The Role must be either Dreamer or Mentor.
+      </div>
+    );
+  }
+};
+
+const arr = []
+
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -53,11 +67,13 @@ export default class Register extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeRole = this.onChangeRole.bind(this);
 
     this.state = {
       username: "",
       email: "",
       password: "",
+      role: "",
       successful: false,
       message: ""
     };
@@ -81,6 +97,12 @@ export default class Register extends Component {
     });
   }
 
+  onChangeRole(e) {
+    this.setState({
+      role: e.target.value
+    });
+  }
+
   handleRegister(e) {
     e.preventDefault();
 
@@ -92,10 +114,12 @@ export default class Register extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
+      arr.push(this.state.role)
       AuthService.register(
         this.state.username,
         this.state.email,
-        this.state.password
+        this.state.password,
+        arr
       ).then(
         response => {
           this.setState({
@@ -172,6 +196,19 @@ export default class Register extends Component {
                     onChange={this.onChangePassword}
                     validations={[required, vpassword]}
                   />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="role">Role</label>
+                  <Select className="form-select"
+                    name="role"
+                    validations={[required, vrole]}
+                    onChange={this.onChangeRole}
+                  >
+                    <option value="">Choose Role for this user</option>
+                    <option value="Dreamer">Dreamer</option>
+                    <option value="Mentor">Mentor</option>
+                  </Select>
                 </div>
 
                 <div className="form-group">

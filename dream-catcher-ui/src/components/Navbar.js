@@ -2,11 +2,11 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <div className="bg-gray-800">
-    <div className='h-16 px-8 flex items-center'>
-      <p className='text-white font-bold'>Dream Catcher</p>
+    <div className="bg-gray-800 px-5">
+      <div className='h-16 px-8 flex items-center'>
+        <p className='text-white font-bold'>Dream Catcher</p>
+      </div>
     </div>
-  </div>
   )
 }
 
