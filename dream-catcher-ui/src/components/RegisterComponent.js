@@ -48,7 +48,7 @@ const vpassword = value => {
 };
 
 const vrole = value => {
-  const roles = ["Dreamer", "Mentor"]
+  const roles = ["dreamer", "mentor"]
   if (!roles.includes(value)) {
     return (
       <div className="alert alert-danger" role="alert">
@@ -206,8 +206,8 @@ export default class Register extends Component {
                     onChange={this.onChangeRole}
                   >
                     <option value="">Choose Role for this user</option>
-                    <option value="Dreamer">Dreamer</option>
-                    <option value="Mentor">Mentor</option>
+                    <option value="dreamer">Dreamer</option>
+                    <option value="mentor">Mentor</option>
                   </Select>
                 </div>
 
