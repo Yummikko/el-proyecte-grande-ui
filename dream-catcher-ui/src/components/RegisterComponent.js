@@ -48,7 +48,9 @@ const vpassword = value => {
 };
 
 const vrole = value => {
+
   const roles = ["dreamer", "mentor"]
+
   if (!roles.includes(value)) {
     return (
       <div className="alert alert-danger" role="alert">
