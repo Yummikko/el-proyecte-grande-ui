@@ -19,6 +19,7 @@ import BoardUser from "./components/BoardDreamerComponent";
 import BoardModerator from "./components/BoardMentorComponent";
 import BoardAdmin from "./components/BoardAdminComponent";
 import HideShow from "./components/HideShow";
+import HomePage from "./components/pages/HomePage";
 
 class App extends Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        {/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container">
             <Link to={"/"} className="navbar-brand">
               DreamCatcher
@@ -93,7 +94,7 @@ class App extends Component {
                   </Link>
                 </li>
               )}
-            </div>
+            </div> */}
 
             {/* {currentUser ? (
               <div className="ml-auto">
@@ -148,7 +149,7 @@ class App extends Component {
                 </li>
               </div>
             )} */}
-            {currentUser ? (
+            {/* {currentUser ? (
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {currentUser && (
@@ -191,15 +192,15 @@ class App extends Component {
                   <Link to={"/register"} className="nav-link">
                     Sign Up
                   </Link>
-                </li>
-              </div>
-            )}
-          </div>
-        </nav>
+                </li> */}
+              {/* </div> */}
+            {/* )} */}
+          {/* </div> */}
+        {/* </nav> */}
 
         <div className="container mt-3">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
