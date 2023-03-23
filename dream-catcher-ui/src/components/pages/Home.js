@@ -1,16 +1,13 @@
 import React from 'react'
-
-import Testimonials from '../misc/Testimonials'
-import Pricing from '../misc/Pricing'
-import Header from '../misc/Header'
-import Welcoming from '../Welcoming'
+import "../../App.css";
+import DreamsGrid from '../DreamsGrid';
 
 const Home = () => {
     return (
         <React.Fragment>
-            <Welcoming/>
-            {/* <Pricing /> */}
-            {/* <Testimonials /> */}
+            <div className='container-home'></div>
+            <DreamsGrid/>
+            <div/>
         </React.Fragment>
     )
 }
