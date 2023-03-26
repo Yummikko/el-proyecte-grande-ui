@@ -14,7 +14,7 @@ const DreamsGrid = () => {
     return (
     <div className="container-just-added">
         <div className="header">
-          <h2 className="just">JUST</h2>
+          <h2 className="just">RECENTLY</h2>
           <h1 className="added">Added</h1>
         </div>
       <div className="dreams-grid">

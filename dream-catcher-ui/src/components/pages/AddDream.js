@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import DreamService from '../../services/DreamService';
+import Navbar from '../Navbar';
 
 const AddDream = () => {
   const [dream, setDream] = useState({
@@ -28,6 +29,8 @@ const AddDream = () => {
   }
 
   return (
+    <div>
+<Navbar/>
     <div className='flex max-w-2xl mx-auto shadow border-b pb-2'>
       
       {<div className='p-2'>
@@ -58,6 +61,7 @@ const AddDream = () => {
       </div>
       )
     }
+    </div>
     </div>
   )
 }
