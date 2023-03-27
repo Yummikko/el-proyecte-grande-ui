@@ -4,6 +4,8 @@ import DreamsGrid from '../DreamsGrid';
 import MostPopular from '../MostPopular';
 import styled from "styled-components";
 import Navbar from '../Navbar';
+import AddDreamButton from '../AddDreamButton';
+
 
 
 const Home = () => {
@@ -13,9 +15,10 @@ const Home = () => {
             <HomeContainer>
                 <BackgroundImage src="https://i.im.ge/2023/03/26/Iliw0X.Niestandardowe-wymiary-1920x1080-px-11.jpg" />
             </HomeContainer>
+            <AddDreamButton/>
+            <MostPopular/>
             <DreamsGrid/>
             <br/>
-            <MostPopular/>
         </React.Fragment>
     )
 }
