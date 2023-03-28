@@ -35,8 +35,7 @@ const DreamDetails = () => {
                         <div className="card">
                             <div className="rounded-top text-white d-flex flex-row">
                                 <div className="ms-4 mt-5 d-flex flex-column">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                                        alt="Generic placeholder" className="img-fluid img-thumbnail mt-4 mb-2" />
+                                    <ImageService data={dream}/>
                                     <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark">
                                         Edit profile
                                     </button>
@@ -74,7 +73,6 @@ const DreamDetails = () => {
                                 <div className="d-flex justify-content-between align-items-center mb-4">
                                     <p className="lead fw-normal mb-0">Recent photos</p>
                                     <p className="mb-0"><a href="#!" className="text-muted">Show all</a></p>
-                                    <ImageService />
                                 </div>
                             </div>
                         </div>
