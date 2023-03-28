@@ -13,7 +13,7 @@ class Navbar extends React.Component {
             {/* Navbar Logo */}
             <div className="logo">
               {/* Logo Placeholder for Illustration */}
-              <a href="#home" style={{ color: 'black', textDecoration: 'none' }}> DreamCatcher</a>
+              <a href="/home" style={{ color: 'black', textDecoration: 'none' }}> DreamCatcher</a>
             </div>
 
             {/* Navbar Links */}
