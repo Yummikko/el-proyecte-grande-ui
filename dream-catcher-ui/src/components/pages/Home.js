@@ -9,8 +9,6 @@ const Home = () => {
     return (
         <React.Fragment>
             <Welcoming/>
-            {/* <Pricing /> */}
-            {/* <Testimonials /> */}
         </React.Fragment>
     )
 }

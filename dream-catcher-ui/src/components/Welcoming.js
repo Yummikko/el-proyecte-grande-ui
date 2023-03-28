@@ -1,31 +1,26 @@
 import React from "react";
 import styled from "styled-components";
+import "../styles/global.css"
 
 
 const Welcoming = () => {
   return (
-    <MainContainer>
-      <BackgroundImage src="https://i.im.ge/2023/03/23/DBQjVW.Niestandardowe-wymiary-1920x1080-px-8.jpg" />
-      <br/><br/><br/>
-    </MainContainer>
+      <div className="container">
+        <div className="row">
+          <div className="col order-last mt-5">
+            <img className="w-75 rounded-circle" src={process.env.PUBLIC_URL + '/images/support-dreams.jpg'} alt="support dreams" />
+            <h2 className="mt-3">Support Dreams</h2>
+          </div>
+          <div className="col">
+            <h1 className="fs-2">DREAM CATCHER</h1>
+          </div>
+          <div className="col order-first">
+            <img className="w-75 rounded-circle" src={process.env.PUBLIC_URL + '/images/share-dream.png'} alt="share dreams" />
+            <h2>Share Dreams</h2>
+          </div>
+        </div>
+      </div>
   );
 };
-
-const MainContainer = styled.div`
-  min-height: 60vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const BackgroundImage = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 70%;
-  height: 80%;
-  z-index: -1;
-  margin-left: 30vh;
-`;
 
 export default Welcoming;
