@@ -9,8 +9,8 @@ const AddDream = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [tags, setTags] = useState([])
     const [dream, setDream] = useState({
-        dreamTitle: "",
-        dreamDescription: "",
+        title: "",
+        description: "",
         tags: {tags},
         image:{selectedFile}
     })
@@ -46,15 +46,15 @@ const AddDream = () => {
             </div>
             <div className='items-center justify-center h-14 w-full my-4'>
                 <label className='d-block'>Dream Title</label>
-                <input type="text" className='h-10 w-96 border mt-2 px-2 py-2' name="dreamTitle" value={dream.dreamTitle} onChange={(e) => handleChange(e)}></input>
+                <input type="text" className='h-10 w-96 border mt-2 px-2 py-2' name="title" value={dream.title} onChange={(e) => handleChange(e)} required/>
             </div>
             <div className='items-center justify-center h-14 w-full my-4'>
                 <label className='d-block'>Dream Description</label>
-                <input type="text" className='h-10 w-96 border mt-2 px-2 py-2' name="dreamDescription" value={dream.dreamDescription} onChange={(e) => handleChange(e)}></input>
+                <textarea type="text" className='h-10 w-150 border mt-2 px-2 py-2' name="description" value={dream.description} onChange={(e) => handleChange(e)} required/>
             </div>
-            <TagsInput setTagsData={(tags) => setTags(tags)}/>
+            <TagsInput setTagsData={(tags) => setTags(tags)} />
             <FileUploader onFileSelectSuccess={(file) => setSelectedFile(file)}
-          onFileSelectError={({ error }) => alert(error)}/>
+          onFileSelectError={({ error }) => alert(error)} />
             <div className='items-center justify-center h-14 w-full my-4'>
                 <button onClick={saveDream} className='btn btn-primary mb-3'>Add</button>
                 <button className='btn btn-info mb-3 ms-1'>Clear</button>

@@ -15,7 +15,7 @@ const FileUploader = ({onFileSelectError, onFileSelectSuccess}) => {
     return (
         <div className="mb-3">
             <label for="formFile" className="form-label">Add Image</label>
-            <input className="form-control" type="file" id="formFile" onChange={handleFileInput} />
+            <input className="form-control" name="image" type="file" id="formFile" onChange={handleFileInput} />
         </div>
     )
 }
