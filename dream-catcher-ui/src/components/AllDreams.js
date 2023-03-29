@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import "../AllDreams.css";
 import { Link } from 'react-router-dom';
+import ImageService from "../services/ImageService";
+
 
 const AllDreams = () => {
   const [dreams, setDreams] = useState([]);
@@ -20,7 +22,7 @@ const AllDreams = () => {
         {dreams.map(dream => (
           <Link to={'#'} key={dream.id} className="dream-item">
             <div className="dream-image-container">
-              <img src={dream.image} className="dream-image" alt="" />
+            <ImageService data={dream} className="dream-image" alt="" />
               <div className="dream-title">{dream.dreamTitle}</div>
             </div>
           </Link>
