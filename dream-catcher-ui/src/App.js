@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Dropdown from 'react-bootstrap/Dropdown';
-import AddDreamer from './components/AddDreamer';
+import AddDreamer from './components/pages/AddDreamer';
 import AddDream from "./components/pages/AddDream";
 import FundDreamer from './components/FundDreamer';
 import PopularDreams from './components/PopularDreams';
+import DreamDetails from './components/pages/DreamDetails';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -68,7 +70,7 @@ class App extends Component {
 
     return (
       <div>
-        {/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        {<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container">
             <Link to={"/"} className="navbar-brand">
               DreamCatcher
@@ -95,62 +97,9 @@ class App extends Component {
                   </Link>
                 </li>
               )}
-            </div> */}
+            </div>
 
-            {/* {currentUser ? (
-              <div className="ml-auto">
-                <li className="nav-item">
-                  <Link to={"/profile"} className="nav-link">
-                    {currentUser.username}
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to={"/add-dreamer"} className="nav-link">
-                    Add Dreamer
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to={"/add-dream"} className="nav-link">
-                    Add Dream
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <a href="/popular-dreams" className="nav-link">
-                    Popular Dreams
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="/donate-dreamer" className="nav-link">
-                    Donate Dreamer
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="/hide-show" className="nav-link">
-                    Hide and Show
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="/login" className="nav-link" onClick={this.logOut}>
-                    LogOut
-                  </a>
-                </li>
-              </div>
-            ) : (
-              <div className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link to={"/login"} className="nav-link">
-                    Login
-                  </Link>
-                </li>
-
-                <li className="nav-item">
-                  <Link to={"/register"} className="nav-link">
-                    Sign Up
-                  </Link>
-                </li>
-              </div>
-            )} */}
-            {/* {currentUser ? (
+            {currentUser ? (
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {currentUser && (
@@ -172,6 +121,7 @@ class App extends Component {
                     <Dropdown.Item href="popular-dreams">Popular Dreams</Dropdown.Item>
                     <Dropdown.Item href="donate-dreamer">Donate Dreamer</Dropdown.Item>
                     <Dropdown.Item href="hide-show">Hide and Show</Dropdown.Item>
+                    <Dropdown.Item href="dream-details">Dream Details</Dropdown.Item>
                     <Dropdown.Item href="login" onClick={this.logOut}>Log Out</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -193,11 +143,12 @@ class App extends Component {
                   <Link to={"/register"} className="nav-link">
                     Sign Up
                   </Link>
-                </li> */}
-              {/* </div> */}
-            {/* )} */}
-          {/* </div> */}
-        {/* </nav> */}
+                </li>
+              </div>
+            )}
+          </div>
+        </nav>
+        }
 
         <div className="container mt-3">
           <Routes>
@@ -214,6 +165,7 @@ class App extends Component {
             <Route path="/donate-dreamer" element={<FundDreamer />} />
             <Route path="/hide-show" element={<HideShow />} />
             <Route path="/add-dream" element={<AddDream />} />
+            <Route path="/dream-details" element={<DreamDetails />} />
             <Route path="/all-dreams" element={<AllDreams />} />
           </Routes>
         </div>
