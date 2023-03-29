@@ -6,7 +6,7 @@ const ImageService = (props) => {
 
     useEffect(() => {
 
-        const fetchImageData = async () => {
+        const fetchImageData = () => {
             try {
                 if (props?.data?.image?.id)
                     fetch(`http://localhost:8080/image/display/${props.data.image.id}`)

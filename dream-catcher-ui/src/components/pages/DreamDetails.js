@@ -34,44 +34,37 @@ const DreamDetails = () => {
                     <div className="col col-lg-9 col-xl-7">
                         <div className="card">
                             <div className="rounded-top text-white d-flex flex-row">
-                                <div className="ms-4 mt-5 d-flex flex-column">
+                                <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
                                     <ImageService data={dream}/>
-                                    <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark">
-                                        Edit profile
-                                    </button>
-                                    </div>
-                                    <div className="ms-3 text-dark">
-                                    <h5 className="">{dream.dreamTitle}</h5>
+                                    <h5 className="mv-2">{dream.dreamTitle}</h5>
                                     <p>{dream.dreamDescription}</p>
                                 </div>
                             </div>
                             <div className="p-4 text-black">
-                                <div className="d-flex justify-content-end text-center py-1">
+                                <div className="d-flex justify-content-center text-center py-1">
                                     <div>
-                                        <p className="mb-1 h5">253</p>
-                                        <p className="small text-muted mb-0">Photos</p>
+                                        <p className="mb-1 h5">{dream.likes}</p>
+                                        <p className="small text-muted mb-0">Likes</p>
                                     </div>
                                     <div className="px-3">
-                                        <p className="mb-1 h5">1026</p>
-                                        <p className="small text-muted mb-0">Followers</p>
+                                        { dream.comments && <p className="mb-1 h5">{Object.keys(dream.comments).length}</p> }
+                                        <p className="small text-muted mb-0">Comments</p>
                                     </div>
                                     <div>
-                                        <p className="mb-1 h5">478</p>
-                                        <p className="small text-muted mb-0">Following</p>
+                                        <p className="mb-1 h5">{dream.views}</p>
+                                        <p className="small text-muted mb-0">Views</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="card-body p-4 text-black">
                                 <div className="mb-5">
-                                    <p className="lead fw-normal mb-1">About</p>
-                                    <div className="p-4">
-                                        <p className="font-italic mb-1">Web Developer</p>
-                                        <p className="font-italic mb-1">Lives in New York</p>
-                                        <p className="font-italic mb-0">Photographer</p>
-                                    </div>
+                                    { dream.dreamStatus && <p className="lead fw-normal mb-1 pa-2">Status: <div className="p-2 bg-success d-inline text-light rounded-pill">{dream.dreamStatus}</div></p>}
                                 </div>
                                 <div className="d-flex justify-content-between align-items-center mb-4">
-                                    <p className="lead fw-normal mb-0">Recent photos</p>
+                                    <p className="lead fw-normal mb-0">Hashtags: {dream.hashtags}</p>
+                                </div>
+                                <div className="d-flex justify-content-between align-items-center mb-4">
+                                    <p className="lead fw-normal mb-0">Comments: {dream.comments}</p>
                                     <p className="mb-0"><a href="#!" className="text-muted">Show all</a></p>
                                 </div>
                             </div>
