@@ -4,12 +4,25 @@ import "../App.css";
 
 const DreamsGrid = () => {
     const [dreams, setDreams] = useState([]);
-  
+    const url = `http://localhost:8080/api/v1/dreams/recents`;
+
+    
     useEffect(() => {
-      fetch('http://localhost:8080/api/v1/dreams/recents')
-        .then(response => response.json())
-        .then(data => setDreams(data));
+    
+        const fetchData = async () => {
+          try {
+            const response = await fetch(url);
+            const json = await response.json();
+            setDreams(json)
+          } catch (error) {
+            console.log("error", error);
+          }
+        };
+    
+        fetchData();
+  
     }, []);
+    
   
     return (
     <div className="container-just-added">

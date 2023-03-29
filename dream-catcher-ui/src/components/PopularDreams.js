@@ -2,11 +2,29 @@ import React, { useState, useEffect } from 'react';
 
 function PopularDreams() {
   const [mostLikedDream, setMostLikedDream] = useState(null);
+  const url = `http://localhost:8080/api/v1/dreams/most-liked`;
 
+  // useEffect(() => {
+  //   fetch('http://localhost:8080/api/v1/dreams/most-liked')
+  //     .then(response => response.json())
+  //     .then(data => setMostLikedDream(data));
+  // }, []);
+
+  
   useEffect(() => {
-    fetch('http://localhost:8080/api/v1/dreams/most-liked')
-      .then(response => response.json())
-      .then(data => setMostLikedDream(data));
+  
+      const fetchData = async () => {
+        try {
+          const response = await fetch(url);
+          const json = await response.json();
+          setMostLikedDream(json)
+        } catch (error) {
+          console.log("error", error);
+        }
+      };
+  
+      fetchData();
+
   }, []);
 
   return (
