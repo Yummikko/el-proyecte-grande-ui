@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const HomePage = () => {
   return (
     <MainContainer>
-      <BackgroundImage src="https://i.im.ge/2023/03/21/DZsUO6.Niestandardowe-wymiary-1920x1080-px-7.jpg" />
+      <BackgroundImage src="https://i.im.ge/2023/03/27/IrlAPS.bg.jpg" />
       <Button to="/home">Let's start!</Button>
     </MainContainer>
   );
