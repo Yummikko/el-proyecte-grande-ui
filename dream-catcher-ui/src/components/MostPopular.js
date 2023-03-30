@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "../PopularDreams.css";
+import ImageService from "../services/ImageService";
+
 
 const Dreams = () => {
 const [dreams, setDreams] = useState([]);
@@ -14,7 +16,7 @@ return (
   <div>
     <div className="header">
       <h2 className="just">MOST POPULAR</h2>
-      <h1 className="added">Dreams</h1>
+      <h1 className="just">DREAMS</h1>
     </div>
     <div className="dreams-container">
       <div className="dreams-line"></div>
@@ -22,7 +24,7 @@ return (
       {dreams.map((dream, index) => (
       <div className="dream" key={index}>
       <div className="dream-photo">
-      <img src={dream.image} />
+      <ImageService data={dream} className="dream-image" />
     </div>
     <div className="dream-details">
       <div className="dream-details-title">
@@ -35,7 +37,7 @@ return (
     </div>
       ))}
     </div>
-  </div>
+</div>
 </div>
 );
 };
