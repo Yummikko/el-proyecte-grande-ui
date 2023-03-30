@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "../PopularDreams.css";
 import ImageService from "../services/ImageService";
+import defaultPhoto from '../assets/images/Default.jpeg';
 
 
 const Dreams = () => {
@@ -24,7 +25,15 @@ return (
       {dreams.map((dream, index) => (
       <div className="dream" key={index}>
       <div className="dream-photo">
-      <ImageService data={dream} className="dream-image" />
+      {dream.image ? (
+              <ImageService data={dream} className="dream-image" />
+            ) : (
+              <img
+                src={defaultPhoto}
+                alt="dream"
+                className="dream-image"
+              />
+            )}
     </div>
     <div className="dream-details">
       <div className="dream-details-title">
