@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../App.css";
 import ImageService from "../services/ImageService";
+import defaultPhoto from '../assets/images/Default.jpeg';
 
 const DreamsGrid = () => {
     const [dreams, setDreams] = useState([]);
@@ -35,7 +36,15 @@ const DreamsGrid = () => {
         {dreams.map(dream => (
           <Link to={`#`} key={dream.id} className="dream-item">
             <div className="dream-image-container">
-            <ImageService data={dream} className="dream-image" />
+            {dream.image ? (
+              <ImageService data={dream} className="dream-image" />
+            ) : (
+              <img
+                src={defaultPhoto}
+                alt="dream"
+                className="dream-image"
+              />
+            )}
               <div className="dream-title">{dream.dreamTitle}</div>
             </div>
           </Link>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import "../AllDreams.css";
 import { Link } from 'react-router-dom';
 import ImageService from "../services/ImageService";
+import defaultPhoto from '../assets/images/Default.jpeg';
+import Navbar from './Navbar';
 
 
 const AllDreams = () => {
@@ -14,6 +16,8 @@ const AllDreams = () => {
   }, []);
 
   return (
+    <div>
+      <Navbar/><br/><br/>
     <div className="container-all-dreams">
       <div className="header">
         <h2 className="all">ALL DREAMS</h2>
@@ -22,12 +26,21 @@ const AllDreams = () => {
         {dreams.map(dream => (
           <Link to={'#'} key={dream.id} className="dream-item">
             <div className="dream-image-container">
-            <ImageService data={dream} className="dream-image" alt="" />
+            {dream.image ? (
+              <ImageService data={dream} className="dream-image" />
+            ) : (
+              <img
+                src={defaultPhoto}
+                alt="dream"
+                className="dream-image"
+              />
+            )}
               <div className="dream-title">{dream.dreamTitle}</div>
             </div>
           </Link>
         ))}
       </div>
+    </div>
     </div>
   );
 };
