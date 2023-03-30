@@ -103,7 +103,6 @@ render() {
                 <Dropdown.Menu>
                   <Dropdown.Item href="profile">{currentUser.username}</Dropdown.Item>
                   <Dropdown.Item href="add-dream">Add Dream</Dropdown.Item>
-                  <Dropdown.Item href="popular-dreams">Popular Dreams</Dropdown.Item>
                   <Dropdown.Item href="hide-show">Hide and Show</Dropdown.Item>
                   <Dropdown.Item href="login" onClick={this.logOut}>Log Out</Dropdown.Item>
                 </Dropdown.Menu>
