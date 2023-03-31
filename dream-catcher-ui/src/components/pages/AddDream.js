@@ -48,7 +48,13 @@ const AddDream = () => {
         })
         .catch((error) => {
             console.log(error);
+        }).then(() => {
+            refreshPage() 
         })
+    }
+
+    function refreshPage() {
+        window.location.reload(false);
     }
 
     useEffect(() => {
