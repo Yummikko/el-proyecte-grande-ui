@@ -1,13 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom";
 import ImageService from "../../services/ImageService";
 import "../../styles/global.css"
 
 
 const DreamDetails = () => {
 
-    const dreamId = '1';
-    const url = `http://localhost:8080/api/v1/dreams/${dreamId}`;
+    const { id } = useParams();
+
+    const url = "http://localhost:8080/api/v1/dreams/" + id;
     
     const [dream, setDream] = useState("");
 
@@ -25,7 +27,7 @@ const DreamDetails = () => {
     
         fetchData();
 
-    }, []);
+    }, [id]);
     
     return(
         <div className="h-100 gradient-custom-2">

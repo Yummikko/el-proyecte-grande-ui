@@ -1,21 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import "../styles/global.css"
 
-function TagsInput(setTagsData){
+function TagsInput({setTagsData}){
+    const [input, setInput] = useState('');
     const [tags, setTags] = useState([])
 
+    const onChange = (e) => {
+        const { value } = e.target;
+        setInput(value);
+    };
+
     function handleKeyDown(e){
+        const trimmedInput = input.trim();
         if(e.key !== 'Enter') return
-        const value = e.target.value
-        if(!value.trim()) return
-        setTags([...tags, value])
-        setTagsData(tags)
-        e.target.value = ''
+        if(trimmedInput.length && !tags.includes(trimmedInput)) {
+            e.preventDefault()
+            setTags(prevState => [...prevState, trimmedInput])
+            setInput('')
+        }
     }
 
     function removeTag(index){
         setTags(tags.filter((el, i) => i !== index))
     }
+
+    useEffect(() => {
+        setTagsData(tags)
+        console.log(tags)
+    }, [tags])
 
     return (
         <div className="tags-input-container">
@@ -24,8 +36,9 @@ function TagsInput(setTagsData){
                     <span className="text">{tag}</span>
                     <span className="close" onClick={() => removeTag(index)}>&times;</span>
                 </div>
-            )) }
-            <input onKeyDown={handleKeyDown} type="text" name="tags" className="tags-input" placeholder="Type something" />
+            ))
+            }
+            <input onKeyDown={handleKeyDown} value={input} onChange={onChange} type="text" name="hashtags" className="tags-input" placeholder="Type something" />
         </div>
     )
 }

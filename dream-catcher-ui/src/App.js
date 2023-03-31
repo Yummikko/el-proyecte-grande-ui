@@ -42,7 +42,7 @@ class App extends Component {
             <Route path="/donate-dreamer" element={<FundDreamer />} />
             <Route path="/hide-show" element={<HideShow />} />
             <Route path="/add-dream" element={<AddDream />} />
-            <Route path="/dream-details" element={<DreamDetails />} />
+            <Route path="/dream-details/:id" element={<DreamDetails />} />
             <Route path="/offer-details/:id" element={<OfferDetails />} />
             <Route path="/all-dreams" element={<AllDreams />} />
           </Routes>

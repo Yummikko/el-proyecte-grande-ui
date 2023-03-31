@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Link } from "react-router-dom";
 import "../PopularDreams.css";
 import ImageService from "../services/ImageService";
 import defaultPhoto from '../assets/images/Default.jpeg';
@@ -41,7 +42,10 @@ return (
       <span>{dream.date}</span>
     </div>
     <p>{dream.dreamDescription}</p>
-    <button className="read-more-btn">Read more</button>
+    <Link to={`/dream-details/${dream.id}`}>Read More</Link>
+    <Routes>
+      <Route path="/dream-details/:id" />
+    </Routes>
     </div>
     </div>
       ))}

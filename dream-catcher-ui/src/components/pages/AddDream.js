@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DreamService from '../../services/DreamService';
 import FileUploader from '../FileUploader';
 import TagsInput from '../TagsInput';
@@ -7,12 +7,13 @@ import Navbar from '../Navbar';
 const AddDream = () => {
 
     const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFileName, setSelectedFileName] = useState(null);
     const [tags, setTags] = useState([])
     const [dream, setDream] = useState({
-        title: "",
-        description: "",
-        tags: {tags},
-        image:{selectedFile}
+        dreamTitle: "",
+        dreamDescription: "",
+        hashtags: {tags},
+        imageName: {selectedFileName}
     })
 
 
@@ -21,11 +22,25 @@ const AddDream = () => {
         setDream({...dream, [e.target.name]:value})
     }
 
+    const handleTagsChange = (e) => {
+        setTags(e)
+        setDream((prevState) => {return {...prevState, hashtags:e}})
+    }
+    
+    const handleFileChange = (e) => {
+        setSelectedFile(e)
+        setSelectedFileName(e.name)
+        setDream((prevState) => {return {...prevState, imageName:e.name}})
+    }
+
     const [data, setData] = useState()
     const message = dream.dreamTitle + " was successfully created."
 
     const saveDream = (e) => {
         e.preventDefault();
+        console.log(dream)
+        console.log(selectedFile)
+        DreamService.uploadFile(selectedFile)
         DreamService.saveDream(dream)
         .then((response) => {
             setData(response)
@@ -34,6 +49,10 @@ const AddDream = () => {
             console.log(error);
         })
     }
+
+    useEffect(() => {
+        console.log(dream)
+    }, [dream])
 
     return (
         <div>
@@ -46,14 +65,14 @@ const AddDream = () => {
             </div>
             <div className='items-center justify-center h-14 w-full my-4'>
                 <label className='d-block'>Dream Title</label>
-                <input type="text" className='h-10 w-96 border mt-2 px-2 py-2' name="title" value={dream.title} onChange={(e) => handleChange(e)} required/>
+                <input type="text" className='h-10 w-96 border mt-2 px-2 py-2' name="dreamTitle" value={dream.dreamTitle} onChange={(e) => handleChange(e)} required />
             </div>
             <div className='items-center justify-center h-14 w-full my-4'>
                 <label className='d-block'>Dream Description</label>
-                <textarea type="text" className='h-10 w-150 border mt-2 px-2 py-2' name="description" value={dream.description} onChange={(e) => handleChange(e)} required/>
+                <textarea type="text" className='h-10 w-150 border mt-2 px-2 py-2' name="dreamDescription" value={dream.dreamDescription} onChange={(e) => handleChange(e)} required />
             </div>
-            <TagsInput setTagsData={(tags) => setTags(tags)} />
-            <FileUploader onFileSelectSuccess={(file) => setSelectedFile(file)}
+            <TagsInput setTagsData={(tags) => handleTagsChange(tags)} />
+            <FileUploader onFileSelectSuccess={(file) => handleFileChange(file)}
           onFileSelectError={({ error }) => alert(error)} />
             <div className='items-center justify-center h-14 w-full my-4'>
                 <button onClick={saveDream} className='btn btn-primary mb-3'>Add</button>
