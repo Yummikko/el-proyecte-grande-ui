@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import AuthService from "../services/AuthService";
+import Navbar from "./Navbar";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -28,6 +29,8 @@ export default class Profile extends Component {
     const { currentUser } = this.state;
 
     return (
+      <div>
+      <Navbar/><br/><br/>
       <div className="container">
         {(this.state.userReady) ?
         <div>
@@ -55,6 +58,7 @@ export default class Profile extends Component {
             currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
         </ul>
       </div>: null}
+      </div>
       </div>
     );
   }

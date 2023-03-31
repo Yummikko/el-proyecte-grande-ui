@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import Navbar from "./Navbar";
 
 import AuthService from "../services/AuthService";
 
@@ -83,6 +84,8 @@ class Login extends Component {
 
   render() {
     return (
+      <div>
+      <Navbar/>
       <div className="col-md-12">
         <div className="card card-container">
           <img
@@ -148,6 +151,7 @@ class Login extends Component {
             />
           </Form>
         </div>
+      </div>
       </div>
     );
   }

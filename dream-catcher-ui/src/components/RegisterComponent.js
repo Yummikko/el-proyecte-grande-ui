@@ -4,6 +4,7 @@ import Select from "react-validation/build/select";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
+import Navbar from "./Navbar";
 
 import AuthService from "../services/AuthService";
 
@@ -148,6 +149,8 @@ export default class Register extends Component {
 
   render() {
     return (
+      <div>
+      <Navbar/>
       <div className="col-md-12">
         <div className="card card-container">
           <img
@@ -241,6 +244,7 @@ export default class Register extends Component {
             />
           </Form>
         </div>
+      </div>
       </div>
     );
   }
