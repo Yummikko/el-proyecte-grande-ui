@@ -3,6 +3,7 @@ import DreamService from '../../services/DreamService';
 import FileUploader from '../FileUploader';
 import TagsInput from '../TagsInput';
 import Navbar from '../Navbar';
+import "../../styles/global.css"
 
 const AddDream = () => {
 
@@ -65,11 +66,11 @@ const AddDream = () => {
             </div>
             <div className='items-center justify-center h-14 w-full my-4'>
                 <label className='d-block'>Dream Title</label>
-                <input type="text" className='h-10 w-96 border mt-2 px-2 py-2' name="dreamTitle" value={dream.dreamTitle} onChange={(e) => handleChange(e)} required />
+                <input type="text" className='dream-title-text h-10 border mt-2 px-2 py-2' name="dreamTitle" value={dream.dreamTitle} onChange={(e) => handleChange(e)} required />
             </div>
             <div className='items-center justify-center h-14 w-full my-4'>
                 <label className='d-block'>Dream Description</label>
-                <textarea type="text" className='h-10 w-150 border mt-2 px-2 py-2' name="dreamDescription" value={dream.dreamDescription} onChange={(e) => handleChange(e)} required />
+                <textarea type="text" className='dream-desc-text h-10 border mt-2 px-2 py-2' name="dreamDescription" value={dream.dreamDescription} onChange={(e) => handleChange(e)} required />
             </div>
             <TagsInput setTagsData={(tags) => handleTagsChange(tags)} />
             <FileUploader onFileSelectSuccess={(file) => handleFileChange(file)}

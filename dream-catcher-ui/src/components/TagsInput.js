@@ -30,15 +30,18 @@ function TagsInput({setTagsData}){
     }, [tags])
 
     return (
-        <div className="tags-input-container">
-            { tags.map((tag, index) => (
-                <div className="tag-item" key={index}>
-                    <span className="text">{tag}</span>
-                    <span className="close" onClick={() => removeTag(index)}>&times;</span>
-                </div>
-            ))
-            }
-            <input onKeyDown={handleKeyDown} value={input} onChange={onChange} type="text" name="hashtags" className="tags-input" placeholder="Type something" />
+        <div>
+            <p>Enter hashtags for this Dream:</p>
+            <div className="tags-input-container">
+                { tags.map((tag, index) => (
+                    <div className="tag-item" key={index}>
+                        <span className="text">{tag}</span>
+                        <span className="close" onClick={() => removeTag(index)}>&times;</span>
+                    </div>
+                ))
+                }
+                <input onKeyDown={handleKeyDown} value={input} onChange={onChange} type="text" name="hashtags" className="tags-input" placeholder="Type something" />
+            </div>
         </div>
     )
 }
