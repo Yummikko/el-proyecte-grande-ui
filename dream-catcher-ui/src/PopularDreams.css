@@ -19,6 +19,7 @@
   flex-direction: row;
   align-items: center;
   margin: 40px;
+  
 }
 
 .dream-photo {
@@ -36,7 +37,7 @@
   border-radius: 50%;
 }
 
-.dream-line {
+/* .dream-line {
   width: 2px;
   height: 100%;
   position: absolute;
@@ -44,21 +45,19 @@
   left: 50%;
   transform: translateX(-50%);
   background-color: #000000;
-}
+} */
 
 .dream-details {
   position: absolute;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   width: 300px;
-  height: 200px;
+  height: 180px;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
   margin-left: 20vh;
-  
+  border: 0.5px solid  rgba(0, 0, 0, 0.247);
 }
 
 .dream-details h2, .dream-details p {
@@ -82,16 +81,24 @@
   margin-bottom: 10px;
 }
 
+
 .read-more-btn {
-  padding: 10px;
-  border-radius: 20px;
-  background-color: #ccc;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  position: absolute;
+  bottom: 10px;
+  display: block;
+  width: 130px;
+  height: 50px;
+  font-size: 18px;
+  color: black;
+  background-color: white;
+  border: 0.5px solid  rgba(0, 0, 0, 0.116);
+  border-radius: 25px;
+  text-align: center;
+  line-height: 30px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .read-more-btn:hover {
-  background-color: #999;
+  background-color: #E3C7C6;
+  color: white;
 }
