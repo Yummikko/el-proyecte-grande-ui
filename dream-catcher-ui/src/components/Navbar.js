@@ -66,6 +66,7 @@ render() {
             <li className="nav-item">
               <li><a href="/home">Home</a></li>
               <li><a href="/all-dreams">Dreams</a></li>
+              <li><a href="/offer-page">Offers</a></li>
               <li><a href="/mentors">Mentors</a></li>
               
             </li>
