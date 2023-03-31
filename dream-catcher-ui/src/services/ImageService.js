@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import defaultPhoto from '../assets/images/Default.jpeg';
 
 const ImageService = (props) => {
 
@@ -27,10 +28,10 @@ const ImageService = (props) => {
     return (
         <div className="row g-2">
             <div className="col mb-2">
-                { props.data
+                { image
                 ? <img src={`data:image/png;base64,${image}`}
                 alt="first" className="w-100 rounded-3" />
-                : <img src="public/logo512.png"
+                : <img src={defaultPhoto}
                 alt="first" className="w-100 rounded-3" />
                 }
             </div>

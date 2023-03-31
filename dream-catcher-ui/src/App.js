@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Routes, Route, Link } from "react-router-dom";
+import Dropdown from 'react-bootstrap/Dropdown';
 import AddDreamer from './components/pages/AddDreamer';
 import AddDream from "./components/pages/AddDream";
 import FundDreamer from './components/FundDreamer';
@@ -25,6 +26,7 @@ class App extends Component {
 
   render() {
     return (
+      
         <div className="container mt-3">
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -40,7 +42,7 @@ class App extends Component {
             <Route path="/donate-dreamer" element={<FundDreamer />} />
             <Route path="/hide-show" element={<HideShow />} />
             <Route path="/add-dream" element={<AddDream />} />
-            <Route path="/dream-details" element={<DreamDetails />} />
+            <Route path="/dream-details/:id" element={<DreamDetails />} />
             <Route path="/offer-details/:id" element={<OfferDetails />} />
             <Route path="/all-dreams" element={<AllDreams />} />
           </Routes>
