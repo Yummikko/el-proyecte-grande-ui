@@ -21,6 +21,7 @@ import BoardAdmin from "./components/BoardAdminComponent";
 import HideShow from "./components/HideShow";
 import HomePage from "./components/pages/HomePage";
 import AllDreams from "./components/AllDreams";
+import OfferPage from "./components/OfferPage";
 
 class App extends Component {
   constructor(props) {
@@ -215,6 +216,7 @@ class App extends Component {
             <Route path="/hide-show" element={<HideShow />} />
             <Route path="/add-dream" element={<AddDream />} />
             <Route path="/all-dreams" element={<AllDreams />} />
+            <Route path="/offer-page" element={<OfferPage />} />
           </Routes>
         </div>
 
