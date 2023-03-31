@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Link } from "react-router-dom";
 import "../PopularDreams.css";
+import ImageService from "../services/ImageService";
+import defaultPhoto from '../assets/images/Default.jpeg';
+
 
 const Dreams = () => {
 const [dreams, setDreams] = useState([]);
@@ -14,7 +18,7 @@ return (
   <div>
     <div className="header">
       <h2 className="just">MOST POPULAR</h2>
-      <h1 className="added">Dreams</h1>
+      <h1 className="just">DREAMS</h1>
     </div>
     <div className="dreams-container">
       <div className="dreams-line"></div>
@@ -22,7 +26,15 @@ return (
       {dreams.map((dream, index) => (
       <div className="dream" key={index}>
       <div className="dream-photo">
-      <img src={dream.image} />
+      {dream.image ? (
+              <ImageService data={dream} className="dream-image" />
+            ) : (
+              <img
+                src={defaultPhoto}
+                alt="dream"
+                className="dream-image"
+              />
+            )}
     </div>
     <div className="dream-details">
       <div className="dream-details-title">
@@ -30,12 +42,15 @@ return (
       <span>{dream.date}</span>
     </div>
     <p>{dream.dreamDescription}</p>
-    <button className="read-more-btn">Read more</button>
+    <Link to={`/dream-details/${dream.id}`}>Read More</Link>
+    <Routes>
+      <Route path="/dream-details/:id" />
+    </Routes>
     </div>
     </div>
       ))}
     </div>
-  </div>
+</div>
 </div>
 );
 };

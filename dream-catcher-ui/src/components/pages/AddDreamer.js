@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import DreamerService from '../services/dreamerService';
+import DreamerService from '../../services/DreamerService';
 
 const AddDreamer = () => {
   const [dreamer, setDreamer] = useState({
