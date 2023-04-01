@@ -42,12 +42,13 @@ const AddDream = () => {
         console.log(dream)
         console.log(selectedFile)
         DreamService.uploadFile(selectedFile)
-        DreamService.saveDream(dream)
         .then((response) => {
             setData(response)
         })
         .catch((error) => {
             console.log(error);
+        }).then(() => {
+            DreamService.saveDream(dream)
         }).then(() => {
             refreshPage() 
         })
