@@ -21,6 +21,7 @@ import HomePage from "./components/pages/HomePage";
 import AllDreams from "./components/AllDreams";
 import OfferDetails from "./components/pages/OfferDetails";
 import OfferPage from "./components/OfferPage";
+import AddOffer from "./components/pages/AddOffer";
 
 class App extends Component {
 
@@ -46,6 +47,7 @@ class App extends Component {
             <Route path="/offer-details/:id" element={<OfferDetails />} />
             <Route path="/all-dreams" element={<AllDreams />} />
             <Route path="/offer-page" element={<OfferPage />} />
+            <Route path="/add-offer/:id" element={<AddOffer />} />
           </Routes>
         </div>
 
