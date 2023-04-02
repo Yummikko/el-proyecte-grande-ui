@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import ImageService from "../../services/ImageService";
 import "../../styles/global.css"
+import Navbar from "../Navbar";
 
 
 const DreamDetails = () => {
@@ -30,6 +31,8 @@ const DreamDetails = () => {
     }, [id]);
     
     return(
+        <div>
+            <Navbar/><br/><br/>
         <div className="h-100 gradient-custom-2">
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
@@ -49,7 +52,8 @@ const DreamDetails = () => {
                                         <p className="small text-muted mb-0">Likes</p>
                                     </div>
                                     <div className="px-3">
-                                        { dream.comments && <p className="mb-1 h5">{Object.keys(dream.comments).length}</p> }
+                                        <p className="mb-1 h5">0</p>
+                                        {/* { dream.comments && <p className="mb-1 h5">{Object.keys(dream.comments).length}</p> } */}
                                         <p className="small text-muted mb-0">Comments</p>
                                     </div>
                                     <div>
@@ -74,6 +78,7 @@ const DreamDetails = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
