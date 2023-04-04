@@ -7,28 +7,44 @@ import Navbar from "../Navbar";
 
 
 const DreamDetails = () => {
-
     const { id } = useParams();
 
-    const url = "http://localhost:8080/api/v1/dreams/" + id;
-    
+    const url = `http://localhost:8080/api/v1/dreams/${id}`;
     const [dream, setDream] = useState("");
+    const [liked, setLiked] = useState(false);
 
     useEffect(() => {
-    
         const fetchData = async () => {
-          try {
-            const response = await fetch(url);
-            const json = await response.json();
-            setDream(json)
-          } catch (error) {
-            console.log("error", error);
-          }
+            try {
+                const response = await fetch(url);
+                const json = await response.json();
+                setDream(json)
+            } catch (error) {
+                console.log("error", error);
+            }
         };
-    
         fetchData();
-
     }, [id]);
+
+    const handleLikeDream = async () => {
+        try {
+            await fetch(`${url}/like`, { method: 'PUT' });
+            setLiked(true);
+            setDream({ ...dream, likes: dream.likes + 1 });
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
+
+    // const handledislikeDream = async () => {
+    //     try {
+    //         await fetch(`${url}/dislike`, { method: 'PUT' });
+    //         setLiked(true);
+    //         setDream({ ...dream, likes: dream.likes - 1 });
+    //     } catch (error) {
+    //         console.log("error", error);
+    //     }
+    // }
     
     return(
         <div>
@@ -47,10 +63,12 @@ const DreamDetails = () => {
                             </div>
                             <div className="p-4 text-black">
                                 <div className="d-flex justify-content-center text-center py-1">
-                                    <div>
-                                        <p className="mb-1 h5">{dream.likes}</p>
-                                        <p className="small text-muted mb-0">Likes</p>
-                                    </div>
+                                <div>
+                                    <p className="mb-1 h5">{dream.likes}</p>
+                                    <p className="small text-muted mb-0">Likes</p>
+                                </div>
+                                <div className="px-3">
+                                </div>
                                     <div className="px-3">
                                         <p className="mb-1 h5">0</p>
                                         {/* { dream.comments && <p className="mb-1 h5">{Object.keys(dream.comments).length}</p> } */}
@@ -73,6 +91,10 @@ const DreamDetails = () => {
                                     <p className="lead fw-normal mb-0">Comments: {dream.comments}</p>
                                     <p className="mb-0"><a href="#!" className="text-muted">Show all</a></p>
                                 </div>
+                                <div className="d-flex justify-content-center text-center py-1">
+                                <button className="btn btn-outline-primary" onClick={handleLikeDream} disabled={liked}>Like</button>
+                                </div>
+                                {liked && <p>You have already liked this dream!</p>}
                             </div>
                         </div>
                     </div>
