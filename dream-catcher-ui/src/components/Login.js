@@ -7,6 +7,10 @@ const SignIn = () => {
     password: "",
   })
 
+  
+  const [loggedIn, setLoggedIn] = useState(false);
+
+
   const handleChange = (e) => {
     const value = e.target.value;
     setDreamer({...login, [e.target.name]:value})
@@ -17,6 +21,7 @@ const SignIn = () => {
     LoginService.signingIn(login)
       .then((response) => {
         console.log(response);
+        setLoggedIn(true);
       })
       .catch((error) => {
         console.log(error);

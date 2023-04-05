@@ -34,7 +34,7 @@ const DreamsGrid = () => {
         </div>
       <div className="dreams-grid">
         {dreams.map(dream => (
-          <Link to={`#`} key={dream.id} className="dream-item">
+          <Link to={`/dream-details/${dream.id}`} key={dream.id} className="dream-item">
             <div className="dream-image-container">
             {dream.image ? (
               <ImageService data={dream} className="dream-image" />

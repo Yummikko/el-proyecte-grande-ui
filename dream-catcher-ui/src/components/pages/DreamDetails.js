@@ -3,52 +3,94 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import ImageService from "../../services/ImageService";
 import "../../styles/global.css"
+import Navbar from "../Navbar";
+import likePhoto from '../../assets/images/like.jpeg';
+import dislikePhoto from '../../assets/images/dislike.jpeg';
+
 
 
 const DreamDetails = () => {
-
     const { id } = useParams();
 
-    const url = "http://localhost:8080/api/v1/dreams/" + id;
-    
+    const url = `http://localhost:8080/api/v1/dreams/${id}`;
     const [dream, setDream] = useState("");
+    const [liked, setLiked] = useState(false);
+    const [disliked, setDisliked] = useState(false);
 
     useEffect(() => {
-    
         const fetchData = async () => {
-          try {
-            const response = await fetch(url);
-            const json = await response.json();
-            setDream(json)
-          } catch (error) {
-            console.log("error", error);
-          }
+            try {
+                const response = await fetch(url);
+                const json = await response.json();
+                setDream(json)
+            } catch (error) {
+                console.log("error", error);
+            }
         };
-    
         fetchData();
-
     }, [id]);
+
+    const handleLikeDislikeDream = () => {
+        if (liked) {
+          handleDislikeDream();
+          setLiked(false);
+          setDisliked(true);
+        } else if (disliked) {
+          handleLikeDream();
+          setLiked(true);
+          setDisliked(false);
+        } else {
+          handleLikeDream();
+          setLiked(true);
+        }
+      }
+
+    const handleLikeDream = async () => {
+        try {
+            await fetch(`${url}/like`, { method: 'PUT' });
+            setLiked(true);
+            setDream({ ...dream, likes: dream.likes + 1 });
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
+
+    const handleDislikeDream = async () => {
+        try {
+            await fetch(`${url}/dislike`, { method: 'PUT' });
+            setDisliked(true);
+            setDream({ ...dream, likes: dream.likes - 1 });
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
     
     return(
+        <div>
+            <Navbar/><br/><br/>
         <div className="h-100 gradient-custom-2">
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col col-lg-9 col-xl-7">
                         <div className="card">
+                        <h1 className="title">{dream.dreamTitle}</h1>
                             <div className="rounded-top text-white d-flex flex-row">
                                 <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
                                     <ImageService data={dream}/>
-                                    <h5 className="mv-2">{dream.dreamTitle}</h5>
+                                    
                                     <p>{dream.dreamDescription}</p>
                                 </div>
                             </div>
                             <div className="p-4 text-black">
                                 <div className="d-flex justify-content-center text-center py-1">
-                                    <div>
-                                        <p className="mb-1 h5">{dream.likes}</p>
-                                        <p className="small text-muted mb-0">Likes</p>
-                                    </div>
+                                <div>
+                                    <p className="mb-1 h5">{dream.likes}</p>
+                                    <p className="small text-muted mb-0">Likes</p>
+                                </div>
+                                <div className="px-3">
+                                </div>
                                     <div className="px-3">
+                                        <p className="mb-1 h5"></p>
                                         { dream.comments && <p className="mb-1 h5">{Object.keys(dream.comments).length}</p> }
                                         <p className="small text-muted mb-0">Comments</p>
                                     </div>
@@ -69,11 +111,16 @@ const DreamDetails = () => {
                                     <p className="lead fw-normal mb-0">Comments: {dream.comments}</p>
                                     <p className="mb-0"><a href="#!" className="text-muted">Show all</a></p>
                                 </div>
+                                <div className="d-flex justify-content-center text-center py-1">
+                                <button id="like-dislike" style={{backgroundImage: `url(${liked ? dislikePhoto : disliked ? likePhoto : likePhoto})`, width: '90px', height: '90px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', border: 'none'}} onClick={handleLikeDislikeDream}>
+                                </button>                                
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
