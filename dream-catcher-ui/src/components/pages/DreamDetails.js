@@ -89,8 +89,8 @@ const DreamDetails = () => {
                                 <div className="px-3">
                                 </div>
                                     <div className="px-3">
-                                        <p className="mb-1 h5">0</p>
-                                        {/* { dream.comments && <p className="mb-1 h5">{Object.keys(dream.comments).length}</p> } */}
+                                        <p className="mb-1 h5"></p>
+                                        { dream.comments && <p className="mb-1 h5">{Object.keys(dream.comments).length}</p> }
                                         <p className="small text-muted mb-0">Comments</p>
                                     </div>
                                     <div>

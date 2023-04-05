@@ -4,11 +4,18 @@ import ImageService from "../../services/ImageService";
 import "../../styles/offer-details.css"
 import defaultPhoto from '../../assets/images/Default.jpeg';
 import Navbar from "../Navbar";
+import likePhoto from '../../assets/images/like.jpeg';
+import dislikePhoto from '../../assets/images/dislike.jpeg';
+
 
 
 function OfferDetails() {
   const { id } = useParams();
+  const url = `http://localhost:8080/api/offers/${id}`;
   const [offer, setOffer] = useState(null);
+  const [liked, setLiked] = useState(false);
+  const [disliked, setDisliked] = useState(false);
+
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/offers/${id}`)
@@ -20,6 +27,41 @@ function OfferDetails() {
   if (!offer) {
     return <div>Loading...</div>;
   }
+
+  const handleLikeDislikeOffer = () => {
+    if (liked) {
+      handleDislikeOffer();
+      setLiked(false);
+      setDisliked(true);
+    } else if (disliked) {
+      handleLikeOffer();
+      setLiked(true);
+      setDisliked(false);
+    } else {
+      handleLikeOffer();
+      setLiked(true);
+    }
+  }
+
+const handleLikeOffer = async () => {
+    try {
+        await fetch(`${url}/like`, { method: 'PUT' });
+        setLiked(true);
+        setOffer({ ...offer, likes: offer.likes + 1 });
+    } catch (error) {
+        console.log("error", error);
+    }
+}
+
+const handleDislikeOffer = async () => {
+    try {
+        await fetch(`${url}/dislike`, { method: 'PUT' });
+        setDisliked(true);
+        setOffer({ ...offer, likes: offer.likes - 1 });
+    } catch (error) {
+        console.log("error", error);
+    }
+}
 
   return(
     <div>
@@ -49,15 +91,15 @@ function OfferDetails() {
                         <div className="p-4 text-black">
                             <div className="d-flex justify-content-center text-center py-1">
                                      <div>
-                                        {/* <p className="mb-1 h5">{dream.likes}</p> */}
+                                        <p className="mb-1 h5">{offer.likes}</p>
                                         <p className="small text-muted mb-0">Likes</p>
                                     </div>
                                     <div className="px-3">
-                                        {/* { dream.comments && <p className="mb-1 h5">{Object.keys(dream.comments).length}</p> } */}
+                                        { offer.comments && <p className="mb-1 h5">{Object.keys(offer.comments).length}</p> }
                                         <p className="small text-muted mb-0">Comments</p>
                                     </div>
                                     <div>
-                                        {/* <p className="mb-1 h5">{dream.views}</p> */}
+                                        <p className="mb-1 h5">{offer.views}</p>
                                         <p className="small text-muted mb-0">Views</p>
                                     </div>
                          
@@ -68,6 +110,10 @@ function OfferDetails() {
                                 <p className="lead fw-normal mb-0">Price: {offer.price}$</p>
                             </div>
                         </div>
+                        <div className="d-flex justify-content-center text-center py-1">
+                                <button id="like-dislike" style={{backgroundImage: `url(${liked ? dislikePhoto : disliked ? likePhoto : likePhoto})`, width: '90px', height: '90px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', border: 'none'}} onClick={handleLikeDislikeOffer}>
+                                </button>                                
+                        </div><br/>
                         <button className="Button">BUY NOW!</button>
                     </div>
                 </div>
