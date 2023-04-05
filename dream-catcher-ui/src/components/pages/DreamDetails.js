@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import ImageService from "../../services/ImageService";
 import "../../styles/global.css"
 import Navbar from "../Navbar";
+import likePhoto from '../../assets/images/like.jpeg';
+import dislikePhoto from '../../assets/images/dislike.jpeg';
+
 
 
 const DreamDetails = () => {
@@ -12,6 +15,7 @@ const DreamDetails = () => {
     const url = `http://localhost:8080/api/v1/dreams/${id}`;
     const [dream, setDream] = useState("");
     const [liked, setLiked] = useState(false);
+    const [disliked, setDisliked] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,6 +30,21 @@ const DreamDetails = () => {
         fetchData();
     }, [id]);
 
+    const handleLikeDislikeDream = () => {
+        if (liked) {
+          handleDislikeDream();
+          setLiked(false);
+          setDisliked(true);
+        } else if (disliked) {
+          handleLikeDream();
+          setLiked(true);
+          setDisliked(false);
+        } else {
+          handleLikeDream();
+          setLiked(true);
+        }
+      }
+
     const handleLikeDream = async () => {
         try {
             await fetch(`${url}/like`, { method: 'PUT' });
@@ -36,15 +55,15 @@ const DreamDetails = () => {
         }
     }
 
-    // const handledislikeDream = async () => {
-    //     try {
-    //         await fetch(`${url}/dislike`, { method: 'PUT' });
-    //         setLiked(true);
-    //         setDream({ ...dream, likes: dream.likes - 1 });
-    //     } catch (error) {
-    //         console.log("error", error);
-    //     }
-    // }
+    const handleDislikeDream = async () => {
+        try {
+            await fetch(`${url}/dislike`, { method: 'PUT' });
+            setDisliked(true);
+            setDream({ ...dream, likes: dream.likes - 1 });
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
     
     return(
         <div>
@@ -92,9 +111,9 @@ const DreamDetails = () => {
                                     <p className="mb-0"><a href="#!" className="text-muted">Show all</a></p>
                                 </div>
                                 <div className="d-flex justify-content-center text-center py-1">
-                                <button className="btn btn-outline-primary" onClick={handleLikeDream} disabled={liked}>Like</button>
+                                <button id="like-dislike" style={{backgroundImage: `url(${liked ? dislikePhoto : disliked ? likePhoto : likePhoto})`, width: '90px', height: '90px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', border: 'none'}} onClick={handleLikeDislikeDream}>
+                                </button>                                
                                 </div>
-                                {liked && <p>You have already liked this dream!</p>}
                             </div>
                         </div>
                     </div>
