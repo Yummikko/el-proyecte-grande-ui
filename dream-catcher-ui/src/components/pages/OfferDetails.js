@@ -69,9 +69,9 @@ const handleDislikeOffer = async () => {
     <div className="h-100 gradient-custom-2">
         <div className="container py-5 h-100">
             <div className="row">
-            <h1 className="title">OFFER DETAILS</h1>
                 <div className="col col-lg-9 col-xl-7">
                     <div className="card">
+                    <h1 className="title">{offer.title}</h1>
                         <div className="rounded-top text-white d-flex flex-row">
                             <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
                             {offer.image ? (
@@ -83,7 +83,6 @@ const handleDislikeOffer = async () => {
                                 className="dream-image"
                             />
                             )}
-                                <h1 className="mv-2" >{offer.title}</h1>
                                 <p>Type: {offer.type}</p>
                                 <p>{offer.description}</p>
                             </div>
