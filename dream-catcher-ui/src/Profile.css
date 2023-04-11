@@ -1,0 +1,41 @@
+/* .profile {
+    background-image: url('https://i.im.ge/2023/04/11/IetoHp.profile-bg.jpg');
+    background-size: cover;
+  } */
+
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .user-photo {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .follow-btn {
+    width: 100px;
+    height: 50px;
+    font-size: 18px;
+    color: white;
+    background-color: #d24d59;
+    border: 2px solid #d24d59;
+    border-radius: 25px;
+    text-align: center;
+    line-height: 50px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .follow-btn:hover {
+    background-color: #DC7C84;
+    color: white;
+  }
+
+  

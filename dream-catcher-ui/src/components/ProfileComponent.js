@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import AuthService from "../services/AuthService";
 import Navbar from "./Navbar";
+import "../Profile.css";
+import ImageService from "../services/ImageService";
+import defaultPhoto from '../assets/images/profile.jpeg';
+import GoBackButton from "./GoBackButton";
 
 export default class Profile extends Component {
+  
   constructor(props) {
     super(props);
 
@@ -29,37 +34,37 @@ export default class Profile extends Component {
     const { currentUser } = this.state;
 
     return (
-      <div>
-      <Navbar/><br/><br/>
-      <div className="container">
+      <div className="container profile">
+        <GoBackButton/>
+      {/* <Navbar/><br/><br/> */}
+      <div className="profile-container">
+      <div className="rounded-top text-white d-flex flex-row">
+          <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
+          {currentUser.image ? (
+              <ImageService data={currentUser} className="user-photo" />
+            ) : (
+              <img
+                src={defaultPhoto}
+                className="user-photo"
+              /> 
+            )}
+            <br/><header><h3><strong>{currentUser.username}</strong> </h3></header>
+                    
+              {currentUser.roles &&
+                currentUser.roles.map((role, index) => (
+                  <p key={index}>
+                    {role === 'ROLE_DREAMER' ? 'Dreamer' : role === 'ROLE_MENTOR' ? 'Mentor' : role === 'ROLE_ADMIN' ? 'Admin' : role}
+                  </p>
+                ))}
+              <button className="follow-btn">Follow</button>
+            </div>
+          </div>
         {(this.state.userReady) ?
         <div>
-        <header className="jumbotron">
-          <h3>
-            <strong>{currentUser.username}</strong> Profile
-          </h3>
-        </header>
-        <p>
-          <strong>Token:</strong>{" "}
-          {currentUser.accessToken.substring(0, 20)} ...{" "}
-          {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-        </p>
-        <p>
-          <strong>Id:</strong>{" "}
-          {currentUser.id}
-        </p>
-        <p>
-          <strong>Email:</strong>{" "}
-          {currentUser.email}
-        </p>
-        <strong>Authorities:</strong>
-        <ul>
-          {currentUser.roles &&
-            currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-        </ul>
       </div>: null}
       </div>
       </div>
     );
   }
 }
+
