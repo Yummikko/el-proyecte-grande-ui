@@ -8,13 +8,15 @@ import { useParams } from 'react-router-dom'
 const AddOffer = () => {
 
     const { id } = useParams();
-    const offerService = new OfferService(id);
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedFileName, setSelectedFileName] = useState(null);
     const [offer, setOffer] = useState({
+        type: "",
         title: "",
         description: "",
-        image: {selectedFileName}
+        price: "",
+        date: "",
+        imageName: {selectedFileName}
     })
 
 
@@ -28,7 +30,7 @@ const AddOffer = () => {
         setSelectedFile(e);
         setSelectedFileName(e.name);
         setOffer((prevState) => {
-          return { ...prevState, image: { selectedFileName } };
+          return {...prevState, imageName: e.name};
         });
       };
 
@@ -40,7 +42,7 @@ const AddOffer = () => {
         console.log(offer)
         console.log(selectedFile)
         OfferService.uploadFile(selectedFile)
-        OfferService.saveDream(offer)
+        OfferService.saveOffer(offer)
         .then((response) => {
             setData(response)
         })
