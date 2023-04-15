@@ -21,7 +21,13 @@ class DreamService {
 
     async saveDream(dream) {
         try {
-            const response = await axios.post(DREAM_API_BASE_URL + 'create', dream);
+            const user = JSON.parse(localStorage.getItem('user'))
+            const config = {
+                headers: {
+                   Authorization: `Bearer ${user.accessToken}`,
+                }
+            }
+            const response = await axios.post(DREAM_API_BASE_URL + 'create', dream, config);
             return response.status;
         } catch (err) {
             return console.warn(err);

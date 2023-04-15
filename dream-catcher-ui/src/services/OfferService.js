@@ -1,10 +1,6 @@
 import axios from "axios";
 
 class OfferService {
-  constructor(id) {
-    this.OFFER_API_BASE_URL = `http://localhost:8080/api/mentors/${id}/offer`;
-  }
-
   async uploadFile(file) {
     const formData = new FormData();
     const config = {
@@ -21,9 +17,15 @@ class OfferService {
 
   async saveOffer(offer) {
     try {
+      const user = JSON.parse(localStorage.getItem('user'))
+      const config = {
+        headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+        }
+      }
       const response = await axios.post(
-        this.OFFER_API_BASE_URL,
-        offer
+        `http://localhost:8080/api/mentors/offer`,
+        offer, config
       );
       return response.status;
     } catch (err) {
@@ -33,4 +35,4 @@ class OfferService {
   }
 }
 
-export default OfferService;
+export default new OfferService;

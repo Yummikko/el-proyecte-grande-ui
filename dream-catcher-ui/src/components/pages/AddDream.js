@@ -41,6 +41,7 @@ const AddDream = () => {
         e.preventDefault();
         console.log(dream)
         console.log(selectedFile)
+        console.log(localStorage.getItem("user"))
         DreamService.uploadFile(selectedFile)
         .then((response) => {
             setData(response)
@@ -49,8 +50,6 @@ const AddDream = () => {
             console.log(error);
         }).then(() => {
             DreamService.saveDream(dream)
-        }).then(() => {
-            refreshPage() 
         })
     }
 
