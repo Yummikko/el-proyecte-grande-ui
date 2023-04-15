@@ -22,8 +22,8 @@ const OfferPage = () => {
         <h1 className="all">ALL OFFERS</h1>
       </div>
       <div className="dreams-grid">
-        {offer.map((offer, index) => (
-          <Link to={'#'} key={index} className="dream-item">
+        {offer.map((offer) => (
+          <Link to={`/offer-details/${offer.id}`} key={offer.id} className="dream-item">
             <div className="dream-image-container">
             {offer.image ? (
               <ImageService data={offer} className="dream-image" />
