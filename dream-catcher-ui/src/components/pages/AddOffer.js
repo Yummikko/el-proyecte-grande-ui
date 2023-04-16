@@ -48,8 +48,6 @@ const AddOffer = () => {
         })
         .catch((error) => {
             console.log(error);
-        }).then(() => {
-            refreshPage() 
         })
     }
 

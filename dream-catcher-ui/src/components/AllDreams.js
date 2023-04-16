@@ -18,7 +18,7 @@ const AllDreams = () => {
   return (
     <div>
       <Navbar/><br/><br/>
-    <div className="container-all-dreams">
+    <div className="container-all-dreams pb-3">
       <div className="header">
         <h2 className="all">ALL DREAMS</h2>
       </div>
