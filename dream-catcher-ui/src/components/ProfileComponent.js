@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import AuthService from "../services/AuthService";
 import Navbar from "./Navbar";
 import "../Profile.css";
-import ImageService from "../services/ImageService";
+import AvatarService from "../services/AvatarService";
 import defaultPhoto from '../assets/images/profile.jpeg';
 import GoBackButton from "./GoBackButton";
 
@@ -40,8 +40,8 @@ export default class Profile extends Component {
       <div className="profile-container">
       <div className="rounded-top text-white d-flex flex-row">
           <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
-          {currentUser.image ? (
-              <ImageService data={currentUser} className="user-photo" />
+          {currentUser.id ? (
+              <AvatarService data={currentUser.id} className="user-photo" />
             ) : (
               <img
                 src={defaultPhoto}
