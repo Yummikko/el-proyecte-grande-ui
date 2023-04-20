@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import "../OfferPage.css";
+import "../../styles/OfferPage.css";
 import { Link } from 'react-router-dom';
-import defaultPhoto from '../assets/images/Default.jpeg';
-import ImageService from "../services/ImageService";
-import Navbar from './Navbar';
+import defaultPhoto from '../../assets/images/Default.jpeg';
+import ImageService from "../../services/ImageService";
+import Navbar from '../sections/Navbar';
 
 const OfferPage = () => {
   const [offer, setOffer] = useState([]);

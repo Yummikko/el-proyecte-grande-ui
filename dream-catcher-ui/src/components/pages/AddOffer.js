@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import OfferService from '../../services/OfferService';
-import FileUploader from '../FileUploader';
-import Navbar from '../Navbar';
+import FileUploader from '../sections/FileUploader';
+import AuthService from "../../services/AuthService";
+import Navbar from '../sections/Navbar';
 import "../../styles/global.css"
 import { useParams } from 'react-router-dom'
 
 const AddOffer = () => {
 
+    const currentUser = AuthService.getCurrentUser();
     const { id } = useParams();
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedFileName, setSelectedFileName] = useState(null);
@@ -16,7 +18,8 @@ const AddOffer = () => {
         description: "",
         price: "",
         date: "",
-        imageName: {selectedFileName}
+        imageName: {selectedFileName},
+        userId: currentUser.id
     })
 
 
@@ -41,19 +44,27 @@ const AddOffer = () => {
         e.preventDefault();
         console.log(offer)
         console.log(selectedFile)
-        OfferService.uploadFile(selectedFile)
-        OfferService.saveOffer(offer)
+        OfferService.saveOffer(offer, selectedFile)
         .then((response) => {
             setData(response)
         })
         .catch((error) => {
             console.log(error);
         })
+        .then(() => {
+            OfferService.uploadFile(selectedFile)
+        })
+        .then(async() => {
+            await delay(5000)
+            refreshPage()
+        })
     }
 
     function refreshPage() {
         window.location.reload(false);
     }
+
+    const delay = ms => new Promise(res => setTimeout(res, ms));
 
     useEffect(() => {
         console.log(offer)

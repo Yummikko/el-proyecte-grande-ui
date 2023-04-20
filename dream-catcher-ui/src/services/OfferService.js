@@ -1,18 +1,10 @@
-import axios from "axios";
+import axios from "axios"
 
 class OfferService {
-  async uploadFile(file) {
-    const formData = new FormData();
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    };
-    formData.append("image", file);
-    return axios
-      .post("http://localhost:8080/upload", formData, config)
-      .then(response => response.status)
-      .catch(err => console.warn(err));
+  constructor() {
+    this.state = {
+        data: {}
+    }
   }
 
   async saveOffer(offer) {
@@ -26,13 +18,32 @@ class OfferService {
       const response = await axios.post(
         `http://localhost:8080/api/mentors/offer`,
         offer, config
-      );
+      )
+      console.log(response.data)
+      this.state.data = response.data
       return response.status;
     } catch (err) {
       console.warn(err);
       return err;
     }
   }
+
+  async uploadFile(file) {
+    const offerId = this.state.data.id
+    console.log(offerId)
+    const formData = new FormData();
+    const config = {
+        headers: {
+        "Content-Type": "multipart/form-data"
+        }
+    };
+    formData.append("image", file);
+    formData.append("offerId", offerId);
+    return axios
+        .post("http://localhost:8080/upload", formData, config)
+        .then(response => response.status)
+        .catch(err => console.warn(err));
+  }
 }
 
-export default new OfferService;
+export default new OfferService();

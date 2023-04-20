@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
-import AuthService from "../services/AuthService";
+import AuthService from "../../services/AuthService";
 import Navbar from "./Navbar";
-import "../Profile.css";
-import AvatarService from "../services/AvatarService";
-import defaultPhoto from '../assets/images/profile.jpeg';
-import GoBackButton from "./GoBackButton";
+import "../../styles/Profile.css";
+import AvatarService from "../../services/AvatarService";
+import defaultPhoto from '../../assets/images/profile.jpeg';
+import GoBackButton from "../buttons/GoBackButton";
 
 export default class Profile extends Component {
   

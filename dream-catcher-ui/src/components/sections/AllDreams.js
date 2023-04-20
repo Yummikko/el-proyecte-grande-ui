@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import "../AllDreams.css";
+import "../../styles/AllDreams.css";
 import { Link } from 'react-router-dom';
-import ImageService from "../services/ImageService";
-import defaultPhoto from '../assets/images/Default.jpeg';
+import ImageService from "../../services/ImageService";
+import defaultPhoto from '../../assets/images/Default.jpeg';
 import Navbar from './Navbar';
 
 
