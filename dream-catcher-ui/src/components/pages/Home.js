@@ -1,10 +1,10 @@
 import React from 'react'
 import "../../App.css";
-import DreamsGrid from '../DreamsGrid';
-import MostPopular from '../MostPopular';
+import DreamsGrid from '../sections/DreamsGrid';
+import MostPopular from '../sections/MostPopular';
 import styled from "styled-components";
-import Navbar from '../Navbar';
-import AddDreamButton from '../AddDreamButton';
+import Navbar from '../sections/Navbar';
+import AddDreamButton from '../buttons/AddDreamButton';
 
 
 

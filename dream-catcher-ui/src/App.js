@@ -2,25 +2,25 @@ import React, { Component } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import AddDreamer from './components/pages/AddDreamer';
 import AddDream from "./components/pages/AddDream";
-import FundDreamer from './components/FundDreamer';
-import PopularDreams from './components/PopularDreams';
+import FundDreamer from './components/sections/FundDreamer';
+import PopularDreams from './components/sections/PopularDreams';
 import DreamDetails from './components/pages/DreamDetails';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import Login from "./components/LoginComponent";
-import Register from "./components/RegisterComponent";
+import Login from "./components/sections/LoginComponent";
+import Register from "./components/sections/RegisterComponent";
 import Home from './components/pages/Home'
-import Profile from "./components/ProfileComponent";
-import BoardUser from "./components/BoardDreamerComponent";
-import BoardModerator from "./components/BoardMentorComponent";
-import BoardAdmin from "./components/BoardAdminComponent";
+import Profile from "./components/sections/ProfileComponent";
+import BoardUser from "./components/sections/BoardDreamerComponent";
+import BoardModerator from "./components/sections/BoardMentorComponent";
+import BoardAdmin from "./components/sections/BoardAdminComponent";
 import HideShow from "./components/HideShow";
 import HomePage from "./components/pages/HomePage";
-import AllDreams from "./components/AllDreams";
+import AllDreams from "./components/sections/AllDreams";
 import OfferDetails from "./components/pages/OfferDetails";
-import OfferPage from "./components/OfferPage";
+import OfferPage from "./components/pages/OfferPage";
 import AddOffer from "./components/pages/AddOffer";
 
 class App extends Component {

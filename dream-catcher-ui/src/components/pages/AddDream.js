@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import DreamService from '../../services/DreamService';
-import FileUploader from '../FileUploader';
-import TagsInput from '../TagsInput';
-import Navbar from '../Navbar';
+import FileUploader from '../sections/FileUploader';
+import TagsInput from '../sections/TagsInput';
+import Navbar from '../sections/Navbar';
+import AuthService from "../../services/AuthService";
+
 import "../../styles/global.css"
 
 const AddDream = () => {
-
+    const currentUser = AuthService.getCurrentUser();
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedFileName, setSelectedFileName] = useState(null);
     const [tags, setTags] = useState([])
@@ -14,7 +16,8 @@ const AddDream = () => {
         dreamTitle: "",
         dreamDescription: "",
         hashtags: {tags},
-        imageName: {selectedFileName}
+        imageName: {selectedFileName},
+        userId: currentUser.id
     })
 
 
@@ -41,21 +44,28 @@ const AddDream = () => {
         e.preventDefault();
         console.log(dream)
         console.log(selectedFile)
-        console.log(localStorage.getItem("user"))
-        DreamService.uploadFile(selectedFile)
-        .then((response) => {
+        const resp = DreamService.saveDream(dream, selectedFile)
+        resp.then((response) => {
             setData(response)
+            console.log(response)
         })
         .catch((error) => {
-            console.log(error);
-        }).then(() => {
-            DreamService.saveDream(dream)
+            console.log(error)
+        })
+        .then(() => {
+            DreamService.uploadFile(selectedFile)
+        })
+        .then(async() => {
+            await delay(5000)
+            refreshPage()
         })
     }
 
     function refreshPage() {
         window.location.reload(false);
     }
+
+    const delay = ms => new Promise(res => setTimeout(res, ms));
 
     useEffect(() => {
         console.log(dream)

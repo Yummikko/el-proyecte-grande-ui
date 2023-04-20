@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
-import AuthService from "../services/AuthService";
+import AuthService from "../../services/AuthService";
 import Navbar from "./Navbar";
-import "../Profile.css";
-import AvatarService from "../services/AvatarService";
-import defaultPhoto from '../assets/images/profile.jpeg';
-import GoBackButton from "./GoBackButton";
+import "../../styles/Profile.css";
+import AvatarService from "../../services/AvatarService";
+import defaultPhoto from '../../assets/images/profile.jpeg';
+import GoBackButton from "../buttons/GoBackButton";
 
 export default class Profile extends Component {
   
@@ -41,7 +41,7 @@ export default class Profile extends Component {
       <div className="rounded-top text-white d-flex flex-row">
           <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
           {currentUser.id ? (
-              <AvatarService data={currentUser.id} className="user-photo" />
+              <AvatarService data={currentUser.profilePictureId} className="user-photo" />
             ) : (
               <img
                 src={defaultPhoto}

@@ -4,9 +4,9 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import Navbar from "./Navbar";
 
-import AuthService from "../services/AuthService";
+import AuthService from "../../services/AuthService";
 
-import { withRouter } from '../common/WithRouter';
+import { withRouter } from '../../common/WithRouter';
 
 const required = value => {
   if (!value) {
