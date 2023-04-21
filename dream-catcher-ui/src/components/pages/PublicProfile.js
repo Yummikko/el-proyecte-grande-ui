@@ -2,8 +2,8 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import ImageService from "../../services/ImageService";
 import defaultPhoto from '../../assets/images/profile.jpeg';
-import GoBackButton from "../GoBackButton";
-import "../../Profile.css";
+import GoBackButton from "../buttons/GoBackButton";
+import "../../styles/Profile.css";
 import { Link } from 'react-router-dom';
 
 
