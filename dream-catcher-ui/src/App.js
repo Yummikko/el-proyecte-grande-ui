@@ -13,6 +13,7 @@ import Login from "./components/LoginComponent";
 import Register from "./components/RegisterComponent";
 import Home from './components/pages/Home'
 import Profile from "./components/ProfileComponent";
+import PublicProfile from './components/pages/PublicProfile';
 import BoardUser from "./components/BoardDreamerComponent";
 import BoardModerator from "./components/BoardMentorComponent";
 import BoardAdmin from "./components/BoardAdminComponent";
@@ -48,6 +49,8 @@ class App extends Component {
             <Route path="/all-dreams" element={<AllDreams />} />
             <Route path="/offer-page" element={<OfferPage />} />
             <Route path="/add-offer/:id" element={<AddOffer />} />
+            <Route path="/profile/:nickname" element={<PublicProfile />} />
+
           </Routes>
         </div>
 

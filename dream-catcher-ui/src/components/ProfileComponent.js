@@ -56,7 +56,7 @@ export default class Profile extends Component {
                     {role === 'ROLE_DREAMER' ? 'Dreamer' : role === 'ROLE_MENTOR' ? 'Mentor' : role === 'ROLE_ADMIN' ? 'Admin' : role}
                   </p>
                 ))}
-              <button className="follow-btn">Follow</button>
+              <button className="follow-btn">Settings</button>
             </div>
           </div>
         {(this.state.userReady) ?
