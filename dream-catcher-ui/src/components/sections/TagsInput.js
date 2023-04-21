@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import "../styles/global.css"
+import "../../styles/global.css"
 
 function TagsInput({setTagsData}){
     const [input, setInput] = useState('');

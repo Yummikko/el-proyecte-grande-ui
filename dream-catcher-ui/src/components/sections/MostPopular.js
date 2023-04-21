@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link } from "react-router-dom";
-import "../PopularDreams.css";
-import ImageService from "../services/ImageService";
-import defaultPhoto from '../assets/images/Default.jpeg';
+import "../../styles/PopularDreams.css";
+import ImageService from "../../services/ImageService";
+import defaultPhoto from '../../assets/images/Default.jpeg';
 
 
 const Dreams = () => {

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ImageService from "../../services/ImageService";
 import "../../styles/offer-details.css"
 import defaultPhoto from '../../assets/images/Default.jpeg';
-import Navbar from "../Navbar";
+import Navbar from "../sections/Navbar";
 import likePhoto from '../../assets/images/like.jpeg';
 import dislikePhoto from '../../assets/images/dislike.jpeg';
 

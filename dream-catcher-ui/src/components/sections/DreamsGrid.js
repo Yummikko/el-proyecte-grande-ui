@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import "../App.css";
-import ImageService from "../services/ImageService";
-import defaultPhoto from '../assets/images/Default.jpeg';
+import "../../App.css";
+import ImageService from "../../services/ImageService";
+import defaultPhoto from '../../assets/images/Default.jpeg';
 
 const DreamsGrid = () => {
     const [dreams, setDreams] = useState([]);

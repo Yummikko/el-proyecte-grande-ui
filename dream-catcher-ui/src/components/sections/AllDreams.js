@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import "../AllDreams.css";
+import "../../styles/AllDreams.css";
 import { Link } from 'react-router-dom';
-import ImageService from "../services/ImageService";
-import defaultPhoto from '../assets/images/Default.jpeg';
+import ImageService from "../../services/ImageService";
+import defaultPhoto from '../../assets/images/Default.jpeg';
 import Navbar from './Navbar';
 
 
@@ -18,7 +18,7 @@ const AllDreams = () => {
   return (
     <div>
       <Navbar/><br/><br/>
-    <div className="container-all-dreams">
+    <div className="container-all-dreams pb-3">
       <div className="header">
         <h2 className="all">ALL DREAMS</h2>
       </div>

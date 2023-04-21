@@ -29,7 +29,7 @@ const BackgroundImage = styled.img`
 
 const Button = styled(Link)`
   position: absolute;
-  bottom: 20px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   display: block;
@@ -44,6 +44,7 @@ const Button = styled(Link)`
   text-align: center;
   line-height: 50px;
   transition: background-color 0.3s, color 0.3s;
+  text-decoration: none;
 
   &:hover {
     background-color: #DC7C84;
