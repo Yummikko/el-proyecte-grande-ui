@@ -3,6 +3,8 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import Navbar from "./Navbar";
+import GoogleLogin from "../user-oauth2/login/GoogleLogin";
+import { getCurrentUser } from "../../services/Oauth2Services"
 
 import AuthService from "../../services/AuthService";
 
@@ -24,8 +26,10 @@ class Login extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
 
     this.state = {
+      authenticated: false,
       username: "",
       password: "",
       loading: false,
@@ -80,6 +84,30 @@ class Login extends Component {
         loading: false
       });
     }
+  }
+
+  loadCurrentlyLoggedInUser() {
+    this.setState({
+      loading: true
+    });
+
+    getCurrentUser()
+      .then(response => {
+        this.setState({
+          currentUser: response,
+          authenticated: true,
+          loading: false
+        });
+      })
+      .catch(error => {
+        this.setState({
+          loading: false
+        });
+      });
+  }
+  
+  componentDidMount() {
+    this.loadCurrentlyLoggedInUser();
   }
 
   render() {
@@ -150,6 +178,7 @@ class Login extends Component {
               }}
             />
           </Form>
+          <GoogleLogin authenticated={this.state.authenticated} />
         </div>
       </div>
       </div>

@@ -5,6 +5,7 @@ import AddDream from "./components/pages/AddDream";
 import FundDreamer from './components/sections/FundDreamer';
 import PopularDreams from './components/sections/PopularDreams';
 import DreamDetails from './components/pages/DreamDetails';
+import OAuth2RedirectHandler from "./components/user-oauth2/oauth2/OAuth2RedirectHandler";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -33,7 +34,7 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login/*" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/user" element={<BoardUser />} />
@@ -43,14 +44,14 @@ class App extends Component {
             <Route path="/popular-dreams" element={<PopularDreams />} />
             <Route path="/donate-dreamer" element={<FundDreamer />} />
             <Route path="/hide-show" element={<HideShow />} />
-            <Route path="/add-dream" element={<AddDream />} />
+            <Route path="/add-dream/*" element={<AddDream />} />
             <Route path="/dream-details/:id" element={<DreamDetails />} />
             <Route path="/offer-details/:id" element={<OfferDetails />} />
             <Route path="/all-dreams" element={<AllDreams />} />
             <Route path="/offer-page" element={<OfferPage />} />
-            <Route path="/add-offer/:id" element={<AddOffer />} />
+            <Route path="/add-offer/:id/*" element={<AddOffer />} />
             <Route path="/profile/:nickname" element={<PublicProfile />} />
-
+            <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>
           </Routes>
         </div>
 
