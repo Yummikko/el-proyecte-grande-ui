@@ -1,5 +1,7 @@
 import axios from "axios";
+import { API_BASE_URL, ACCESS_TOKEN } from "../constants";
 const API_URL = "http://localhost:8080/api/auth/";
+
 
 class AuthService {
   login(username, password) {
@@ -34,6 +36,20 @@ class AuthService {
 
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));
+  }
+
+  getCurrentUserOauth2() {
+    if (!localStorage.getItem(ACCESS_TOKEN)) {
+      return Promise.reject("No access token set.");
+    }
+  
+    return axios.get(API_BASE_URL + "/api/users/profile")
+    .then(response => {
+      console.log(response.data)
+      localStorage.setItem("user", JSON.stringify(response.data));
+
+      return response.data;
+    })
   }
 }
 
