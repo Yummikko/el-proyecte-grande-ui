@@ -14,7 +14,6 @@ const AllDreams = () => {
       .then(response => response.json())
       .then(data => setDreams(data));
   }, []);
-
   return (
     <div>
       <Navbar/><br/><br/>
@@ -22,6 +21,11 @@ const AllDreams = () => {
       <div className="header">
         <h2 className="all">ALL DREAMS</h2>
       </div>
+      { dreams.length == 0 &&
+          <div class="loader-container d-flex justify-content-center">
+            <div class="loader"></div>
+          </div>
+      } 
       <div className="dreams-grid">
         {dreams.map(dream => (
           <Link to={`/dream-details/${dream.id}`} key={dream.id} className="dream-item">

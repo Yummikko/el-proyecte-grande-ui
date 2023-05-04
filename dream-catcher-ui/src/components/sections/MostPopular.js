@@ -20,6 +20,11 @@ return (
       <h2 className="just">MOST POPULAR</h2>
       <h1 className="just">DREAMS</h1>
     </div>
+    { dreams.length == 0 &&
+        <div class="loader-container d-flex justify-content-center">
+          <div class="loader"></div>
+        </div>
+    } 
     <div className="dreams-container">
       <div className="dreams-line"></div>
       <div className="dreams">

@@ -23,7 +23,8 @@ export default class Profile extends Component {
 
     getCurrentUser()
       .then(response => {
-        localStorage.setItem("user", JSON.stringify(response));
+        if(response != undefined)
+          localStorage.setItem("user", JSON.stringify(response));
         this.setState({
           currentUser: response
         });

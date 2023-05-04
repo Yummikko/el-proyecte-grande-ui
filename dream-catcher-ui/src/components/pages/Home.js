@@ -31,14 +31,14 @@ const HomeContainer = styled.div`
     border-style: ridge;
     border-width: thin;
     border-color: black;
-    margin-top: 15vh;
-    margin-bottom: 30vh;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
   `;
   
   const BackgroundImage = styled.img`
     position: absolute;
     margin-left: auto;
-  margin-right: auto;
+    margin-right: auto;
     width: 60%;
     height: 60%;
     z-index: -1;
