@@ -24,6 +24,7 @@ import AllDreams from "./components/sections/AllDreams";
 import OfferDetails from "./components/pages/OfferDetails";
 import OfferPage from "./components/pages/OfferPage";
 import AddOffer from "./components/pages/AddOffer";
+import MentorProfile from './components/pages/MentorProfile';
 
 class App extends Component {
 
@@ -50,8 +51,9 @@ class App extends Component {
             <Route path="/offer-details/:id" element={<OfferDetails />} />
             <Route path="/all-dreams" element={<AllDreams />} />
             <Route path="/offer-page" element={<OfferPage />} />
-            <Route path="/add-offer/:id/*" element={<AddOffer />} />
-            <Route path="/profile/:nickname" element={<PublicProfile />} />
+            <Route path="/add-offer/:id" element={<AddOffer />} />
+            <Route path="/:nickname" element={<PublicProfile />} />
+            <Route path="/mentor/:nickname" element={<MentorProfile />} />
           </Routes>
         </div>
 
