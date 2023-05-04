@@ -26,7 +26,6 @@ class Login extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-    this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
 
     this.state = {
       authenticated: false,
@@ -84,30 +83,6 @@ class Login extends Component {
         loading: false
       });
     }
-  }
-
-  loadCurrentlyLoggedInUser() {
-    this.setState({
-      loading: true
-    });
-
-    getCurrentUser()
-      .then(response => {
-        this.setState({
-          currentUser: response,
-          authenticated: true,
-          loading: false
-        });
-      })
-      .catch(error => {
-        this.setState({
-          loading: false
-        });
-      });
-  }
-  
-  componentDidMount() {
-    this.loadCurrentlyLoggedInUser();
   }
 
   render() {
@@ -178,7 +153,7 @@ class Login extends Component {
               }}
             />
           </Form>
-          <GoogleLogin authenticated={this.state.authenticated} />
+          <GoogleLogin />
         </div>
       </div>
       </div>

@@ -6,49 +6,49 @@ import "../../styles/Profile.css";
 import AvatarService from "../../services/AvatarService";
 import defaultPhoto from '../../assets/images/profile.jpeg';
 import GoBackButton from "../buttons/GoBackButton";
+import { getCurrentUser } from "../../services/Oauth2Services"
 
 export default class Profile extends Component {
   
   constructor(props) {
     super(props);
-
     this.state = {
-      redirect: null,
-      userReady: false,
-      loading: false
+      currentUser: null,
     };
+
+    this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
   }
 
-  async componentDidMount() {
-    await this.loadCurrentlyLoggedInUserDetails();
-    const currentUser = AuthService.getCurrentUser();
+  loadCurrentlyLoggedInUser() {
 
-    if (!currentUser) this.setState({ redirect: "/home" });
-    this.setState({ currentUser: currentUser, userReady: true })
+    getCurrentUser()
+      .then(response => {
+        localStorage.setItem("user", JSON.stringify(response));
+        this.setState({
+          currentUser: response
+        });
+      })
+      .catch(error => {
+        this.setState({
+          loading: false
+        });
+      });
   }
 
-  async loadCurrentlyLoggedInUserDetails() {
-    try {
-      this.setState({
-        loading: true
-      });
+  componentDidMount() {
+    this.loadCurrentlyLoggedInUser();
 
-      this.setState({
-        loading: false
-      });
-    } catch (error) {
-      this.setState({
-        loading: false
-      });
-    }
+    // if (!currentUser) this.setState({ redirect: "/home" });
   }
+
 
   render() {
     if (this.state.redirect) {
       return <Navigate to={this.state.redirect} />
     }
-
-    const { currentUser } = this.state;
+    let currentUser = this.state.currentUser;
+    if(!currentUser)
+      currentUser =  AuthService.getCurrentUser();
 
     return (
       <div className="container profile">
@@ -58,8 +58,8 @@ export default class Profile extends Component {
         <div className="rounded-top text-white d-flex flex-row">
             <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
               {currentUser ?
-                (currentUser.imageUrl ? (<img
-                        src={currentUser.imageUrl}
+                (currentUser.profileImgUrl ? (<img
+                        src={currentUser.profileImgUrl}
                         alt={currentUser.username}
                         class="rounded-circle"
                         width="150"
