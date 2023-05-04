@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import LoginService from '../../services/LoginService';
+import LoginService from '../../services/LoginService'
 import GoogleLogin from '../user-oauth2/login/GoogleLogin'
 
 const SignIn = () => {

@@ -28,7 +28,7 @@ export function getCurrentUser() {
   }
 
   return request({
-    url: API_BASE_URL + "/profile",
+    url: API_BASE_URL + "/api/users/profile",
     method: "GET"
   });
 }

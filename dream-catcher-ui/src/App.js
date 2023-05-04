@@ -24,8 +24,56 @@ import AllDreams from "./components/sections/AllDreams";
 import OfferDetails from "./components/pages/OfferDetails";
 import OfferPage from "./components/pages/OfferPage";
 import AddOffer from "./components/pages/AddOffer";
+import { getCurrentUser } from "./services/Oauth2Services"
+import { ACCESS_TOKEN } from "./constants";
+import Alert from "./components/sections/Alert";
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      authenticated: false,
+      currentUser: null,
+      loading: false
+    };
+
+    this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  loadCurrentlyLoggedInUser() {
+    this.setState({
+      loading: true
+    });
+
+    getCurrentUser()
+      .then(response => {
+        this.setState({
+          currentUser: response,
+          authenticated: true,
+          loading: false
+        });
+      })
+      .catch(error => {
+        this.setState({
+          loading: false
+        });
+      });
+  }
+  
+  handleLogout() {
+    localStorage.removeItem(ACCESS_TOKEN);
+    this.setState({
+      authenticated: false,
+      currentUser: null
+    });
+    Alert.success("You're safely logged out!");
+  }
+
+  componentDidMount() {
+    this.loadCurrentlyLoggedInUser();
+  }
 
   render() {
     return (
@@ -36,7 +84,9 @@ class App extends Component {
             <Route path="/home" element={<Home />} />
             <Route path="/login/*" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} authenticated={this.state.authenticated}
+              currentUser={this.state.currentUser} />
+            <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
             <Route path="/user" element={<BoardUser />} />
             <Route path="/mentor" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
@@ -51,7 +101,6 @@ class App extends Component {
             <Route path="/offer-page" element={<OfferPage />} />
             <Route path="/add-offer/:id/*" element={<AddOffer />} />
             <Route path="/profile/:nickname" element={<PublicProfile />} />
-            <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>
           </Routes>
         </div>
 
