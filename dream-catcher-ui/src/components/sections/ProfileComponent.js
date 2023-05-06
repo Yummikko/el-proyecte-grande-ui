@@ -25,28 +25,37 @@ export default class Profile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.photoUpload = this.photoUpload.bind(this)
   }
-  loadCurrentlyLoggedInUser() {
 
-    getCurrentUser()
-      .then(response => {
-        console.log(response)
-        if(response != undefined)
-          localStorage.setItem("user", JSON.stringify(response));
-        this.setState({
-          currentUser: response,
-          file: null
+  loadCurrentlyLoggedInUser() {
+    if(this.state.currentUser == null)
+      getCurrentUser()
+        .then(response => {
+          console.log(response)
+          if(response != undefined)
+            localStorage.setItem("user", JSON.stringify(response));
+          this.setState({
+            currentUser: response,
+            file: null
+          });
+        })
+        .catch(error => {
+          this.setState({
+            loading: false
+          });
         });
-      })
-      .catch(error => {
-        this.setState({
-          loading: false
-        });
-      });
   }
 
   componentDidMount() {
-    this.loadCurrentlyLoggedInUser();
+    let checkCurrentUser = AuthService.getCurrentUser();
 
+    if(!checkCurrentUser)
+      this.loadCurrentlyLoggedInUser();
+    else
+      this.setState({
+        currentUser: checkCurrentUser,
+        ...this.state.file,
+      });
+    
     // if (!currentUser) this.setState({ redirect: "/home" });
   }
 
@@ -89,9 +98,7 @@ export default class Profile extends Component {
       return <Navigate to={this.state.redirect} />
     }
     let currentUser = this.state.currentUser;
-    if(!currentUser)
-      currentUser =  AuthService.getCurrentUser();
-
+    console.log(currentUser)
     return (
       <div className="container profile">
         <GoBackButton/>
@@ -99,12 +106,12 @@ export default class Profile extends Component {
       <div className="profile-container">
         <div className="text-white d-flex flex-row">
             <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
-            {currentUser ? (
+            {currentUser && (
               currentUser.profilePictureId ? (
                 <form onSubmit={this.handleSubmit}>
                   <label htmlFor="photo-upload" className="custom-file-upload">
-                    <AvatarService data={currentUser.profilePictureId} className="user-photo rounded-circle" />
-                    <input className="profile-change" id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
+                    <AvatarService data={currentUser.profilePictureId} className=" rounded-circle" />
+                    <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
                   </label>
                   <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
                 </form>
@@ -123,20 +130,21 @@ export default class Profile extends Component {
                     <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
                   </form>) 
                 )
-               ): (
-                <form onSubmit={this.handleSubmit}>
+               )}
+               { !currentUser &&
+                (<form onSubmit={this.handleSubmit}>
                   <label htmlFor="photo-upload" className="custom-file-upload">
                     <img
                       src={defaultPhoto}
-                      className="user-photo rounded-circle"
+                      className="rounded-circle"
                     /> 
-                    <input className="profile-change" id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
+                    <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
                   </label>
                   <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
-                </form>
-                )
-              }
+                </form>)
+                }
                 <br/><header><h3><strong>{currentUser && currentUser.username}</strong> </h3></header>
+                
                 {currentUser &&       
                   (currentUser.roles &&
                     currentUser.roles.map((role, index) => (

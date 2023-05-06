@@ -66,9 +66,7 @@ render() {
             <li className="nav-item">
               <li><a href="/home">Home</a></li>
               <li><a href="/all-dreams">Dreams</a></li>
-              <li><a href="/offer-page">Offers</a></li>
-              <li><a href="/mentors">Mentors</a></li>
-              
+              <li><a href="/offer-page">Offers</a></li>  
             </li>
             </ul>
                          
@@ -77,7 +75,7 @@ render() {
               <ul id="menu" style={{fontSize: '25px'}}>
               <li className="nav-item">
                 <Link to={"/mentor"} className="nav-link">
-                  Mentor Board
+                  Settings
                 </Link>
               </li>
               </ul>

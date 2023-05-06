@@ -76,8 +76,8 @@ const AddOffer = () => {
         <div className='flex max-w-2xl mx-auto shadow border-b pb-2'>
         
         {<div className='p-2'>
-            <div className='font-thin text-2xl tracking-wider'>
-                <h1>Add offer</h1>
+            <div className='font-thin text-2xl tracking-wider mt-5 mb-2'>
+                <h1 className='header'>Add offer</h1>
             </div>
             <div className='items-center justify-center h-14 w-full my-4'>
                 <label className='d-block'>Offer Title</label>
