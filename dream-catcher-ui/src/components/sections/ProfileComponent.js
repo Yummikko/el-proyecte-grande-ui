@@ -104,7 +104,7 @@ export default class Profile extends Component {
                 <form onSubmit={this.handleSubmit}>
                   <label htmlFor="photo-upload" className="custom-file-upload">
                     <AvatarService data={currentUser.profilePictureId} className="user-photo rounded-circle" />
-                    <input id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
+                    <input className="profile-change" id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
                   </label>
                   <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
                 </form>
@@ -118,7 +118,7 @@ export default class Profile extends Component {
                         class="rounded-circle"
                         width="150"
                       />
-                      <input style={{display: 'none'}} id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
+                      <input className="profile-change" style={{display: 'none'}} id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
                     </label>
                     <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
                   </form>) 
@@ -130,7 +130,7 @@ export default class Profile extends Component {
                       src={defaultPhoto}
                       className="user-photo rounded-circle"
                     /> 
-                    <input id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
+                    <input className="profile-change" id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
                   </label>
                   <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
                 </form>
