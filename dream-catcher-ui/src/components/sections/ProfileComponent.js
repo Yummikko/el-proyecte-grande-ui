@@ -115,8 +115,7 @@ export default class Profile extends Component {
                   </label>
                   <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
                 </form>
-                ) :
-                (currentUser.profileImgUrl && (
+                ) : ( currentUser.profileImgUrl && (
                   <form onSubmit={this.handleSubmit}>
                     <label htmlFor="photo-upload" className="custom-file-upload">
                       <img
@@ -128,20 +127,23 @@ export default class Profile extends Component {
                       <input className="profile-change" style={{display: 'none'}} id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
                     </label>
                     <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
-                  </form>) 
+                  </form>) )
+                )}
+
+                {currentUser && (
+                  !currentUser.profileImgUrl &&
+                  (<form onSubmit={this.handleSubmit}>
+                    <label htmlFor="photo-upload" className="custom-file-upload">
+                      <img
+                        src={defaultPhoto}
+                        className="rounded-circle"
+                      /> 
+                      <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
+                    </label>
+                    <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
+                  </form>)
                 )
-               )}
-               { !currentUser &&
-                (<form onSubmit={this.handleSubmit}>
-                  <label htmlFor="photo-upload" className="custom-file-upload">
-                    <img
-                      src={defaultPhoto}
-                      className="rounded-circle"
-                    /> 
-                    <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
-                  </label>
-                  <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
-                </form>)
+
                 }
                 <br/><header><h3><strong>{currentUser && currentUser.username}</strong> </h3></header>
                 

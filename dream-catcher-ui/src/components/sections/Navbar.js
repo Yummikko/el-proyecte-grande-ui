@@ -59,7 +59,7 @@ render() {
           <div>
           <div className="logo">
             {/* Logo Placeholder for Illustration */}
-            <a href="home" style={{ color: 'black', textDecoration: 'none' }}> <img className="me-5 pb-2" width="230" src={dreamLogo} /></a>
+            <a href="/home" style={{ color: 'black', textDecoration: 'none' }}> <img className="me-5 pb-2" width="230" src={dreamLogo} /></a>
           </div>
           
           <ul id="menu" style={{fontSize: '25px', fontWeight: 'bold' }}>
