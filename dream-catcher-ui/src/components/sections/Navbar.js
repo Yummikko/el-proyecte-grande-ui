@@ -75,7 +75,7 @@ render() {
               <ul id="menu" style={{fontSize: '25px'}}>
               <li className="nav-item">
                 <Link to={"/mentor"} className="nav-link">
-                  Settings
+                  Manage Offers
                 </Link>
               </li>
               </ul>
@@ -100,9 +100,9 @@ render() {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item href="profile">{currentUser.username}</Dropdown.Item>
-                  <Dropdown.Item href="add-dream">Add Dream</Dropdown.Item>
-                  <Dropdown.Item href="login" onClick={this.logOut}>Log Out</Dropdown.Item>
+                  <Dropdown.Item href="/profile">{currentUser.username}</Dropdown.Item>
+                  <Dropdown.Item href="/add-dream">Add Dream</Dropdown.Item>
+                  <Dropdown.Item href="/login" onClick={this.logOut}>Log Out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
 
