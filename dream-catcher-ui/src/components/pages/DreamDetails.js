@@ -75,7 +75,7 @@ const DreamDetails = () => {
                         <div className="card">
                         <h1 className="title">{dream.dreamTitle}</h1>
                             <div className="rounded-top text-white d-flex flex-row">
-                                <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
+                                <div className="mt-5 d-flex flex-column text-dark align-items-center">
                                     <ImageService data={dream}/>
                                     
                                     <p>{dream.dreamDescription}</p>

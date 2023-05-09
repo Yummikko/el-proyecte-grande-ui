@@ -1,4 +1,5 @@
 import axios from "axios"
+import { ACCESS_TOKEN } from "../constants";
 
 const DREAM_API_BASE_URL = "http://localhost:8080/api/v1/dreams/";
 
@@ -11,11 +12,18 @@ class DreamService {
     async saveDream(dream) {
         try {
             const user = JSON.parse(localStorage.getItem('user'))
+            let accessToken = localStorage.getItem(ACCESS_TOKEN)
+            let headersString = null
+            if (user.accessToken == undefined)
+                headersString = accessToken;
+            else
+                headersString = user.accessToken
             const config = {
                 headers: {
-                   Authorization: `Bearer ${user.accessToken}`,
+                   Authorization: `Bearer ${headersString}`,
                 }
             }
+            console.log(config)
             const response = await axios.post(DREAM_API_BASE_URL + 'create', dream, config)
             console.log(response.data)
             this.state.data = response.data

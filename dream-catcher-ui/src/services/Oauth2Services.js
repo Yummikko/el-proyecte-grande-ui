@@ -8,7 +8,7 @@ const request = options => {
   if (localStorage.getItem(ACCESS_TOKEN)) {
     headers.append("Authorization", "Bearer " + localStorage.getItem(ACCESS_TOKEN));
   }
-
+  console.log(headers)
   const defaults = { headers: headers };
   options = Object.assign({}, defaults, options);
 

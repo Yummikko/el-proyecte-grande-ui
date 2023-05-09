@@ -56,8 +56,8 @@ const AddDream = () => {
             DreamService.uploadFile(selectedFile)
         })
         .then(async() => {
-            await delay(5000)
-            refreshPage()
+            // await delay(5000)
+            // refreshPage()
         })
     }
 
