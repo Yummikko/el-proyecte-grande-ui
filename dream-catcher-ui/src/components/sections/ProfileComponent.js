@@ -106,45 +106,45 @@ export default class Profile extends Component {
       <div className="profile-container">
         <div className="text-white d-flex flex-row">
             <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
-            {currentUser && (
-              currentUser.profilePictureId ? (
-                <form onSubmit={this.handleSubmit}>
-                  <label htmlFor="photo-upload" className="custom-file-upload">
-                    <AvatarService data={currentUser.profilePictureId} className=" rounded-circle" />
-                    <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
-                  </label>
-                  <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
-                </form>
-                ) : ( currentUser.profileImgUrl && (
-                  <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="photo-upload" className="custom-file-upload">
-                      <img
-                        src={currentUser.profileImgUrl}
-                        alt={currentUser.username}
-                        class="rounded-circle"
-                        width="150"
-                      />
-                      <input className="profile-change" style={{display: 'none'}} id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
-                    </label>
-                    <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
-                  </form>) )
-                )}
-
-                {currentUser && (
-                  !currentUser.profileImgUrl &&
-                  (<form onSubmit={this.handleSubmit}>
-                    <label htmlFor="photo-upload" className="custom-file-upload">
-                      <img
-                        src={defaultPhoto}
-                        className="rounded-circle"
-                      /> 
-                      <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
-                    </label>
-                    <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
-                  </form>)
+              {currentUser && (
+                (() => {
+                    let current = this.state.currentUser
+                    if (current.profilePictureId) {
+                        return <form onSubmit={this.handleSubmit}>
+                        <label htmlFor="photo-upload" className="custom-file-upload">
+                          <AvatarService data={current.profilePictureId} className=" rounded-circle" />
+                          <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
+                        </label>
+                        <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
+                      </form>
+                    } else if (current.profileImgUrl) {
+                        return <form onSubmit={this.handleSubmit}>
+                        <label htmlFor="photo-upload" className="custom-file-upload">
+                          <img
+                            src={current.profileImgUrl}
+                            alt={current.username}
+                            class="rounded-circle"
+                            width="150"
+                          />
+                          <input className="profile-change" style={{display: 'none'}} id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
+                        </label>
+                        <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
+                      </form>
+                    } else {
+                        return <form onSubmit={this.handleSubmit}>
+                        <label htmlFor="photo-upload" className="custom-file-upload">
+                          <img
+                            src={defaultPhoto}
+                            className="rounded-circle"
+                          /> 
+                          <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
+                        </label>
+                        <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
+                      </form>
+                    }
+                  })()
                 )
-
-                }
+              }
                 <br/><header><h3><strong>{currentUser && currentUser.username}</strong> </h3></header>
                 
                 {currentUser &&       
