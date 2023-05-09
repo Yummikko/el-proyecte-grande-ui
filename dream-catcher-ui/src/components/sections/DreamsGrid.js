@@ -28,10 +28,15 @@ const DreamsGrid = () => {
   
     return (
     <div className="container-just-added">
-        <div className="header">
+        <div className="header mb-5">
           <h2 className="just">RECENTLY</h2>
           <h1 className="just">ADDED</h1>
         </div>
+        { dreams.length == 0 &&
+          <div class="loader-container d-flex justify-content-center">
+            <div class="loader"></div>
+          </div>
+        } 
       <div className="dreams-grid">
         {dreams.map(dream => (
           <Link to={`/dream-details/${dream.id}`} key={dream.id} className="dream-item">

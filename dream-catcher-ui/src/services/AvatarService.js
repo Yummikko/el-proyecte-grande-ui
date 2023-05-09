@@ -26,13 +26,13 @@ const AvatarService = (props) => {
     }, [props?.data]);
 
     return (
-        <div className="row g-2">
-            <div className="col mb-2">
+        <div className="g-2">
+            <div className="mb-2">
                 { image
                 ? <img src={`data:image/png;base64,${image}`}
-                alt="first" className="w-50 rounded-circle" />
+                alt="first" className="avatar rounded-circle" />
                 : <img src={defaultPhoto}
-                alt="first" className="w-50 rounded-circle" />
+                alt="first" className="avatar rounded-circle" />
                 }
             </div>
         </div>

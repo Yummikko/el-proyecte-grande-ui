@@ -56,8 +56,8 @@ const AddDream = () => {
             DreamService.uploadFile(selectedFile)
         })
         .then(async() => {
-            await delay(5000)
-            refreshPage()
+            // await delay(5000)
+            // refreshPage()
         })
     }
 
@@ -74,11 +74,11 @@ const AddDream = () => {
     return (
         <div>
     <Navbar/>
-        <div className='flex max-w-2xl mx-auto shadow border-b pb-2'>
+        <div className='flex max-w-2xl mx-auto mt-5 shadow border-b pb-2'>
         
         {<div className='p-2'>
-            <div className='font-thin text-2xl tracking-wider'>
-                <h1>Add dream</h1>
+            <div className='font-thin text-2xl tracking-wider mt-3 mb-5'>
+                <h1 className='header'>Add dream</h1>
             </div>
             <div className='items-center justify-center h-14 w-full my-4'>
                 <label className='d-block'>Dream Title</label>

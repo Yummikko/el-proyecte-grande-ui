@@ -85,6 +85,7 @@ const handleDislikeOffer = async () => {
                             )}
                                 <p>Type: {offer.type}</p>
                                 <p>{offer.description}</p>
+                                <p className="fw-light">Added: {offer.date}</p>
                             </div>
                         </div>
                         <div className="p-4 text-black">
@@ -109,7 +110,7 @@ const handleDislikeOffer = async () => {
                                 <p className="lead fw-normal mb-0">Price: {offer.price}$</p>
                             </div>
                         </div>
-                        <div className="d-flex justify-content-center text-center py-1">
+                        <div className="d-flex justify-content-center text-center py-1 mb-4">
                                 <button id="like-dislike" style={{backgroundImage: `url(${liked ? dislikePhoto : disliked ? likePhoto : likePhoto})`, width: '90px', height: '90px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', border: 'none'}} onClick={handleLikeDislikeOffer}>
                                 </button>                                
                         </div><br/>
