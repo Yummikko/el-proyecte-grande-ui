@@ -3,6 +3,8 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import Navbar from "./Navbar";
+import GoogleLogin from "../user-oauth2/login/GoogleLogin";
+import { getCurrentUser } from "../../services/Oauth2Services"
 
 import AuthService from "../../services/AuthService";
 
@@ -26,6 +28,7 @@ class Login extends Component {
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
+      authenticated: false,
       username: "",
       password: "",
       loading: false,
@@ -150,6 +153,7 @@ class Login extends Component {
               }}
             />
           </Form>
+          <GoogleLogin />
         </div>
       </div>
       </div>

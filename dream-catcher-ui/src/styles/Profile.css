@@ -29,7 +29,7 @@
     border: 2px solid #d24d59;
     border-radius: 25px;
     text-align: center;
-    line-height: 50px;
+    line-height: 10px;
     transition: background-color 0.3s, color 0.3s;
   }
   

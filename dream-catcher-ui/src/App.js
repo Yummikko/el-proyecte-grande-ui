@@ -5,6 +5,7 @@ import AddDream from "./components/pages/AddDream";
 import FundDreamer from './components/sections/FundDreamer';
 import PopularDreams from './components/sections/PopularDreams';
 import DreamDetails from './components/pages/DreamDetails';
+import OAuth2RedirectHandler from "./components/user-oauth2/oauth2/OAuth2RedirectHandler";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -24,6 +25,7 @@ import OfferDetails from "./components/pages/OfferDetails";
 import OfferPage from "./components/pages/OfferPage";
 import AddOffer from "./components/pages/AddOffer";
 import MentorProfile from './components/pages/MentorProfile';
+import CardProfile from './components/sections/ProfileUpdate'
 import AllMentors from "./components/sections/AllMentors";
 import ProfileTest from "./components/pages/Profile";
 
@@ -36,9 +38,10 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login/*" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
             <Route path="/user" element={<BoardUser />} />
             <Route path="/mentor" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
@@ -46,7 +49,7 @@ class App extends Component {
             <Route path="/popular-dreams" element={<PopularDreams />} />
             <Route path="/donate-dreamer" element={<FundDreamer />} />
             <Route path="/hide-show" element={<HideShow />} />
-            <Route path="/add-dream" element={<AddDream />} />
+            <Route path="/add-dream/*" element={<AddDream />} />
             <Route path="/dream-details/:id" element={<DreamDetails />} />
             <Route path="/offer-details/:id" element={<OfferDetails />} />
             <Route path="/all-dreams" element={<AllDreams />} />
@@ -58,6 +61,7 @@ class App extends Component {
             <Route path="/test" element={<ProfileTest />} />
 
 
+            <Route path="/profile-update" element={<CardProfile />} />
           </Routes>
         </div>
 

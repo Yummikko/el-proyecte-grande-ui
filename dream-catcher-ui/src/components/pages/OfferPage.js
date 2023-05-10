@@ -21,6 +21,11 @@ const OfferPage = () => {
       <div className="header">
         <h1 className="all">ALL OFFERS</h1>
       </div>
+      { offer.length == 0 &&
+          <div class="loader-container d-flex justify-content-center">
+            <div class="loader"></div>
+          </div>
+      } 
       <div className="dreams-grid">
         {offer.map((offer) => (
           <Link to={`/offer-details/${offer.id}`} key={offer.id} className="dream-item">
