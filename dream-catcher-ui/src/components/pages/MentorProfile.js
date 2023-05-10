@@ -13,6 +13,8 @@ const PublicProfile = () => {
     const [mentor, setMentor] = useState({});
     const [offers, setOffers] = useState([]);
     const mentorUrl = `http://localhost:8080/api/mentors/${nickname}`;
+    const [followed, setFollowed] = useState(false);
+    const [unfollowed, setUnfollowed] = useState(false);
   
 
     useEffect(() => {
@@ -35,6 +37,42 @@ const PublicProfile = () => {
           .catch(error => console.log(error));
       }, []);
 
+      const handleFollowUnfollow = () => {
+        if (followed) {
+            handleUnfollow();
+          setFollowed(false);
+          setUnfollowed(true);
+        } else if (unfollowed) {
+            handleFollow();
+          setFollowed(true);
+          setUnfollowed(false);
+        } else {
+            handleFollow();
+          setFollowed(true);
+        }
+      }
+
+    const handleFollow = async () => {
+        try {
+            await fetch(mentorUrl + '/follow', { method: 'PUT' });
+            setFollowed(true);
+            setMentor({ ...mentor, followers: mentor.followers + 1 });
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
+
+    const handleUnfollow = async () => {
+        try {
+            await fetch(mentorUrl + '/unfollow', { method: 'PUT' });
+            setUnfollowed(true);
+            setMentor({ ...mentor, followers: mentor.followers - 1 });
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
+
+
   
     return (
       <div className="container profile">
@@ -54,7 +92,7 @@ const PublicProfile = () => {
               <h2>{mentor.nickname}</h2>
               <p>Mentor</p>
               <p>Followers: {mentor.followers}</p>
-              <button className="follow-btn">FOLLOW</button><br/>
+              <button className="follow-btn" onClick={handleFollowUnfollow}>{followed ? 'Unfollow' : 'Follow'}</button><br/>
             </div>
           </div>
         </div><br/>

@@ -5,14 +5,18 @@ import defaultPhoto from '../../assets/images/profile.jpeg';
 import GoBackButton from "../buttons/GoBackButton";
 import "../../styles/Profile.css";
 import { Link } from 'react-router-dom';
+import AuthService from "../../services/AuthService";
 
 
 
 const PublicProfile = () => {
+    const currentUser = AuthService.getCurrentUser();
     const { nickname } = useParams();
     const [dreamer, setDreamer] = useState({});
     const [dreams, setDreams] = useState([]);
     const dreamerUrl = `http://localhost:8080/api/v1/dreamers/${nickname}`;
+    const [followed, setFollowed] = useState(false);
+    const [unfollowed, setUnfollowed] = useState(false);
   
 
     useEffect(() => {
@@ -35,6 +39,50 @@ const PublicProfile = () => {
           .catch(error => console.log(error));
       }, []);
 
+      const handleFollowUnfollow = () => {
+        if (followed) {
+            handleUnfollow();
+          setFollowed(false);
+          setUnfollowed(true);
+        } else if (unfollowed) {
+            handleFollow();
+          setFollowed(true);
+          setUnfollowed(false);
+        } else {
+            handleFollow();
+          setFollowed(true);
+        }
+      }
+
+    const handleFollow = async () => {
+        try {
+            await fetch(dreamerUrl + '/follow', { method: 'PUT' });
+            setFollowed(true);
+            setDreamer({ ...dreamer, followers: dreamer.followers + 1 });
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
+
+    const handleUnfollow = async () => {
+        try {
+            await fetch(dreamerUrl + '/unfollow', { method: 'PUT' });
+            setUnfollowed(true);
+            setDreamer({ ...dreamer, followers: dreamer.followers - 1 });
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
+
+    const getCurrentUserId = () => {
+      const currentUser = AuthService.getCurrentUser();
+      if (currentUser) {
+        return currentUser.id;
+      }
+      return null;
+    };
+  
+
   
     return (
       <div className="container profile">
@@ -54,7 +102,7 @@ const PublicProfile = () => {
               <h2>{dreamer.nickname}</h2>
               <p>Dreamer</p>
               <p>Followers: {dreamer.followers}</p>
-              <button className="follow-btn">FOLLOW</button><br/>
+              <button className="follow-btn" onClick={handleFollowUnfollow}>FOLLOW</button><br/>
             </div>
           </div>
         </div><br/>
