@@ -59,8 +59,6 @@ class App extends Component {
             <Route path="/mentor/:nickname" element={<MentorProfile />} />
             <Route path="/mentors" element={<AllMentors />} />
             <Route path="/test" element={<ProfileTest />} />
-
-
             <Route path="/profile-update" element={<CardProfile />} />
           </Routes>
         </div>
