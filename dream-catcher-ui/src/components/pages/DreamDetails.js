@@ -8,29 +8,52 @@ import "../../styles/global.css";
 import Navbar from "../sections/Navbar";
 import likePhoto from '../../assets/images/like.jpeg';
 import dislikePhoto from '../../assets/images/dislike.jpeg';
+import defaultPhoto from '../../assets/images/profile.jpeg';
 
+import {
+    MDBCard,
+    MDBCardBody,
+    MDBCol,
+    MDBContainer,
+    MDBIcon,
+    MDBRow,
+    MDBTypography,
+  } from "mdb-react-ui-kit";
+  
 
 
 const DreamDetails = () => {
     const { id } = useParams();
-
     const url = `http://localhost:8080/api/v1/dreams/${id}`;
+    const commentsUrl = `http://localhost:8080/api/comments/dream/${id}`;
     const [dream, setDream] = useState("");
     const [liked, setLiked] = useState(false);
     const [disliked, setDisliked] = useState(false);
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(url);
-                const json = await response.json();
-                setDream(json)
-            } catch (error) {
-                console.log("error", error);
-            }
-        };
-        fetchData();
-    }, [id]);
+      const fetchData = async () => {
+          try {
+              const response = await fetch(url);
+              const json = await response.json();
+              setDream(json)
+          } catch (error) {
+              console.log("error", error);
+          }
+      };
+      fetchData();
+  }, [id]);
+
+
+      useEffect(() => {
+        fetch(commentsUrl)
+        .then(response => {
+          console.log(response);
+          return response.json();
+        })
+          .then(data => {setComments(data)})
+          .catch(error => console.log(error));
+      }, []);
 
     const handleLikeDislikeDream = () => {
         if (liked) {
@@ -99,23 +122,20 @@ const DreamDetails = () => {
                                         <p className="small text-muted mb-0">Comments</p>
                                     </div>
                                     <div>
-                                        <p className="mb-1 h5">{dream.views}</p>
+                                        <p className="px-4 mb-1 h5">{dream.views}</p>
                                         <p className="small text-muted mb-0">Views</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="card-body p-4 text-black">
-                                <div className="mb-5">
+                            <div className="d-flex justify-content-center text-center py-1">
                                     { dream.dreamStatus && <p className="lead fw-normal mb-1 pa-2">Status: <div className="p-2 bg-success d-inline text-light rounded-pill">{dream.dreamStatus}</div></p>}
+                                </div><br/>
+                                <div className="d-flex justify-content-center text-center py-1">
+                                      { dream.dreamStatus && <p className="lead fw-normal mb-0">Hashtags: {dream.hashtags.join(', ')}</p> }
                                 </div>
-                                <div className="d-flex justify-content-between align-items-center mb-4">
-                                    { dream.dreamStatus && <p className="lead fw-normal mb-0">Hashtags: {dream.hashtags.join(', ')}</p> }
-                                </div>
-                                <div className="d-flex justify-content-between align-items-center mb-4">
-                                    <p className="lead fw-normal mb-0 text-center">Comments: {dream.comments.map(
-                                        comment => <div>{comment.comment}</div>
-                                    )}</p>
-                                    <p className="mb-0"><a href="#!" className="text-muted">Show all</a></p>
+                                <div className="d-flex justify-content-center text-center py-1">
+                                <p className="mb-0"><a href="/comments" className="text-muted">Add comment</a></p>
                                 </div>
                                 <div className="d-flex justify-content-center text-center py-1">
                                     <button id="like-dislike" style={{backgroundImage: `url(${liked ? dislikePhoto : disliked ? likePhoto : likePhoto})`, width: '90px', height: '90px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', border: 'none'}} onClick={handleLikeDislikeDream}>
@@ -133,8 +153,48 @@ const DreamDetails = () => {
                 </div>
             </div>
         </div>
-        </div>
-    )
-}
+        <section className="vh-100">
+    <MDBContainer className="py-5" style={{ maxWidth: "2000px" }}>
+      <MDBRow className="justify-content-center">
+        <MDBCol md="11" lg="9" xl="7">
+        {comments.map((comment) => (
+            <div className="d-flex flex-start mb-4" key={comment.id}>
+              <img
+                className="photo"
+                src={defaultPhoto}
+              />
+
+              <MDBCard className="w-100">
+                <MDBCardBody className="p-4">
+                  <div>
+                    <MDBTypography tag="h5">{comment.username}</MDBTypography>
+                    <p className="small">{comment.createdDate}</p>
+                    <p>{comment.comment}</p>
+
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div className="d-flex align-items-center">
+                        <a href="#!" className="link-muted me-2">
+                          <MDBIcon fas icon="thumbs-up me-1" />
+                          {comment.likes  + " ❤️"}
+                           
+                        </a>
+                      
+                      </div>
+                      <a href="#!" className="link-muted">
+                        <MDBIcon fas icon="reply me-1" /> Reply
+                      </a>
+                    </div>
+                  </div>
+                </MDBCardBody>
+              </MDBCard>
+            </div>
+            ))}
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+  </section>
+    </div>
+  );
+};
 
 export default DreamDetails

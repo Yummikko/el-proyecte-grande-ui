@@ -26,6 +26,8 @@ import OfferPage from "./components/pages/OfferPage";
 import AddOffer from "./components/pages/AddOffer";
 import MentorProfile from './components/pages/MentorProfile';
 import CardProfile from './components/sections/ProfileUpdate'
+import AllMentors from "./components/sections/AllMentors";
+import ProfileTest from "./components/pages/Profile";
 import PaypalComponent from "./components/sections/PaypalComponent";
 import PaypalSuccess from "./components/sections/paypal/PayPalSuccess";
 
@@ -57,6 +59,8 @@ class App extends Component {
             <Route path="/add-offer/:id" element={<AddOffer />} />
             <Route path="/:nickname" element={<PublicProfile />} />
             <Route path="/mentor/:nickname" element={<MentorProfile />} />
+            <Route path="/mentors" element={<AllMentors />} />
+            <Route path="/test" element={<ProfileTest />} />
             <Route path="/profile-update" element={<CardProfile />} />
             <Route path="/paypal-transfer/:id" element={<PaypalComponent />} />
             <Route path="/paypal-success" element={<PaypalSuccess />} />
