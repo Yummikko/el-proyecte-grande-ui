@@ -16,7 +16,7 @@ const LetterService = async (props) => {
             content: props.description,
             sender: user.username
         }
-
+        console.log(headersString)
         return await axios({
                 maxRedirects: 0,
                 method: 'post',
