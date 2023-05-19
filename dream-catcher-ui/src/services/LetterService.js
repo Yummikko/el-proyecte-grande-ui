@@ -1,7 +1,7 @@
 import axios from "axios"
 import { ACCESS_TOKEN } from "../constants"
 
-const PAYPAL_API_BASE_URL = "http://localhost:8080/api/v1/inbox/new_letter"
+const LETTER_API_BASE_URL = "http://localhost:8080/api/v1/inbox/new_letter"
 
 const LetterService = async (props) => {
         const user = JSON.parse(localStorage.getItem('user'))
@@ -20,7 +20,7 @@ const LetterService = async (props) => {
         return await axios({
                 maxRedirects: 0,
                 method: 'post',
-                url: PAYPAL_API_BASE_URL,
+                url: LETTER_API_BASE_URL,
                 data: data,
                 headers: {
                         Authorization: `Bearer ${headersString}`,
