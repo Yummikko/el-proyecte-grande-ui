@@ -85,7 +85,7 @@ const handleDislikeOffer = async () => {
                             )}
                                 <p>Type: {offer.type}</p>
                                 <p>{offer.description}</p>
-                                <p className="fw-light">Added: {offer.date}</p>
+                                <p className="fw-light">Starting date: {offer.date}</p>
                             </div>
                         </div>
                         <div className="p-4 text-black">

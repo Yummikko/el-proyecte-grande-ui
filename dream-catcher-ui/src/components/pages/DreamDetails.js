@@ -1,8 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import ImageService from "../../services/ImageService";
-import "../../styles/global.css"
+import "../../styles/global.css";
 import Navbar from "../sections/Navbar";
 import likePhoto from '../../assets/images/like.jpeg';
 import dislikePhoto from '../../assets/images/dislike.jpeg';
@@ -64,10 +66,15 @@ const DreamDetails = () => {
             console.log("error", error);
         }
     }
+
+    if (!dream) {
+        return <div>Loading...</div>;
+    }
     
     return(
         <div>
             <Navbar/><br/><br/>
+        {console.log(dream.comments)}
         <div className="h-100 gradient-custom-2">
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
@@ -87,8 +94,6 @@ const DreamDetails = () => {
                                     <p className="mb-1 h5">{dream.likes}</p>
                                     <p className="small text-muted mb-0">Likes</p>
                                 </div>
-                                <div className="px-3">
-                                </div>
                                     <div className="px-3">
                                         { dream.comments && <p className="mb-1 h5">{Object.keys(dream.comments).length}</p> }
                                         <p className="small text-muted mb-0">Comments</p>
@@ -107,13 +112,21 @@ const DreamDetails = () => {
                                     { dream.dreamStatus && <p className="lead fw-normal mb-0">Hashtags: {dream.hashtags.join(', ')}</p> }
                                 </div>
                                 <div className="d-flex justify-content-between align-items-center mb-4">
-                                    <p className="lead fw-normal mb-0">Comments: {dream.comments}</p>
+                                    <p className="lead fw-normal mb-0 text-center">Comments: {dream.comments.map(
+                                        comment => <div>{comment.comment}</div>
+                                    )}</p>
                                     <p className="mb-0"><a href="#!" className="text-muted">Show all</a></p>
                                 </div>
                                 <div className="d-flex justify-content-center text-center py-1">
-                                <button id="like-dislike" style={{backgroundImage: `url(${liked ? dislikePhoto : disliked ? likePhoto : likePhoto})`, width: '90px', height: '90px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', border: 'none'}} onClick={handleLikeDislikeDream}>
-                                </button>                                
+                                    <button id="like-dislike" style={{backgroundImage: `url(${liked ? dislikePhoto : disliked ? likePhoto : likePhoto})`, width: '90px', height: '90px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', border: 'none'}} onClick={handleLikeDislikeDream}>
+                                    </button>               
                                 </div>
+                                <div className="d-flex justify-content-center text-center py-1">
+                                    <p className="text-center">Send a Letter with donation</p>
+                                </div>
+                                <p className="text-center">
+                                    <Link to={`/paypal-transfer/${id}`}><FontAwesomeIcon className="mt-1 h1 text-success" icon={faEnvelope} /></Link>
+                                </p>
                             </div>
                         </div>
                     </div>
