@@ -77,7 +77,7 @@ const AddDream = () => {
         <div className='flex max-w-2xl mx-auto mt-5 shadow border-b pb-2'>
         
         {<div className='p-2'>
-            <div className='font-thin text-2xl tracking-wider mt-3 mb-5'>
+            <div className='font-thin text-2xl tracking-wider mt-3 mb-5' style={{fontSize: '25px', fontWeight: 'bold', fontFamily: 'Antic Didone' }}>
                 <h1 className='header'>Add dream</h1>
             </div>
             <div className='items-center justify-center h-14 w-full my-4'>

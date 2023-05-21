@@ -62,7 +62,7 @@ render() {
             <a href="/home" style={{ color: 'black', textDecoration: 'none' }}> <img className="me-5 pb-2" width="230" src={dreamLogo} /></a>
           </div>
           
-          <ul id="menu" style={{fontSize: '25px', fontWeight: 'bold' }}>
+          <ul id="menu" style={{fontSize: '25px', fontWeight: 'bold', fontFamily: 'Antic Didone' }}>
             <li className="nav-item">
               <li><a href="/home">Home</a></li>
               <li><a href="/all-dreams">Dreams</a></li>
