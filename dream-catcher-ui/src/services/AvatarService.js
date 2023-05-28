@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import defaultPhoto from '../assets/images/profile.jpeg';
+import Tooltip from "../common/Tooltip";
 
 const AvatarService = (props) => {
 
@@ -27,14 +28,16 @@ const AvatarService = (props) => {
 
     return (
         <div className="g-2">
-            <div className="mb-2">
-                { image
-                ? <img src={`data:image/png;base64,${image}`}
-                alt="first" className="avatar rounded-circle" />
-                : <img src={defaultPhoto}
-                alt="first" className="avatar rounded-circle" />
-                }
-            </div>
+            <Tooltip content="Upload new profile picture" direction="right">
+                <div className="mb-2">
+                    { image
+                    ? <img src={`data:image/png;base64,${image}`}
+                    alt="first" className="avatar rounded-circle" />
+                    : <img src={defaultPhoto}
+                    alt="first" className="avatar rounded-circle" />
+                    }
+                </div>
+            </Tooltip>
         </div>
     )
 }

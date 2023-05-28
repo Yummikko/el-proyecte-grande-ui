@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import AuthService from "../../services/AuthService";
-import Navbar from "./Navbar";
 import "../../styles/Profile.css";
 import AvatarService from "../../services/AvatarService";
 import defaultPhoto from '../../assets/images/profile.jpeg';
@@ -9,8 +8,10 @@ import GoBackButton from "../buttons/GoBackButton";
 import { getCurrentUser } from "../../services/Oauth2Services"
 import ProfileService from "../../services/ProfileService";
 import Alert from "./Alert";
+import Tooltip from "../../common/Tooltip";
 
 export default class Profile extends Component {
+  
   
   constructor(props) {
     super(props);
@@ -56,7 +57,11 @@ export default class Profile extends Component {
         ...this.state.file,
       });
     
-    // if (!currentUser) this.setState({ redirect: "/home" });
+    
+  }
+
+  componentDidUpdate() {
+    
   }
 
   handleClick() {
@@ -90,8 +95,16 @@ export default class Profile extends Component {
     console.log(this.state)
     console.log(this.state.currentUser.id)
     ProfileService.updateUserImg(this.state.file, this.state.currentUser.id)
+    localStorage.removeItem("user")
+    this.refreshPage()
   }
 
+  async refreshPage() {
+    await this.delay(1500)
+    window.location.reload(false);
+  }
+
+  delay = ms => new Promise(res => setTimeout(res, ms));
 
   render() {
     if (this.state.redirect) {
@@ -112,20 +125,22 @@ export default class Profile extends Component {
                     if (current.profilePictureId) {
                         return <form onSubmit={this.handleSubmit}>
                         <label htmlFor="photo-upload" className="custom-file-upload">
-                          <AvatarService data={current.profilePictureId} className=" rounded-circle" />
-                          <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
+                          <AvatarService data={current.profilePictureId} className=" rounded-circle"/>
+                          <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} data-toggle-bs="tooltip" title="Upload new image"/>
                         </label>
                         <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
                       </form>
                     } else if (current.profileImgUrl) {
                         return <form onSubmit={this.handleSubmit}>
                         <label htmlFor="photo-upload" className="custom-file-upload">
-                          <img
-                            src={current.profileImgUrl}
-                            alt={current.username}
-                            class="rounded-circle"
-                            width="150"
-                          />
+                          <Tooltip content="Upload new profile picture" direction="right">
+                            <img
+                              src={current.profileImgUrl}
+                              alt={current.username}
+                              class="rounded-circle"
+                              width="150"
+                            />
+                          </Tooltip>
                           <input className="profile-change" style={{display: 'none'}} id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
                         </label>
                         <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
@@ -133,10 +148,12 @@ export default class Profile extends Component {
                     } else {
                         return <form onSubmit={this.handleSubmit}>
                         <label htmlFor="photo-upload" className="custom-file-upload">
-                          <img
-                            src={defaultPhoto}
-                            className="rounded-circle"
-                          /> 
+                          <Tooltip content="Upload new profile picture" direction="right">
+                            <img
+                              src={defaultPhoto}
+                              className="rounded-circle"
+                            />
+                          </Tooltip> 
                           <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />
                         </label>
                         <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
