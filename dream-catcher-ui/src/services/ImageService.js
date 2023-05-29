@@ -6,13 +6,12 @@ const ImageService = (props) => {
     const [image, setImage] = useState("")
 
     useEffect(() => {
-
-        const fetchImageData = () => {
+        const fetchImageData = async () => {
             try {
-                if (props?.data?.image?.id)
-                    fetch(`http://localhost:8080/image/display/${props.data.image.id}`)
+                if (props?.data?.image)
+                    await fetch(`http://localhost:8080/image/display/${props.data.image}`)
                     .then(response =>
-                        response.text()
+                         response.text()
                     ).then((actualData) =>
                         setImage(actualData)
                     )

@@ -10,58 +10,61 @@ import dislikePhoto from '../../assets/images/dislike.jpeg';
 
 
 function OfferDetails() {
-  const { id } = useParams();
-  const url = `http://localhost:8080/api/offers/${id}`;
-  const [offer, setOffer] = useState(null);
-  const [liked, setLiked] = useState(false);
-  const [disliked, setDisliked] = useState(false);
+    const { id } = useParams();
+    const url = `http://localhost:8080/api/offers/${id}`;
+    const [offer, setOffer] = useState(null);
+    const [liked, setLiked] = useState(false);
+    const [disliked, setDisliked] = useState(false);
+
+    useEffect(() => {
+        fetchData();
+    }, [id]);
+    
+    const fetchData = async () => {
+        await fetch(url)
+        .then(response => response.json())
+        .then(data => setOffer(data));
+    };
 
 
-  useEffect(() => {
-    fetch(`http://localhost:8080/api/offers/${id}`)
-      .then((response) => response.json())
-      .then((data) => setOffer(data))
-      .catch((error) => console.log(error));
-  }, [id]);
-
-  if (!offer) {
-    return <div>Loading...</div>;
-  }
-
-  const handleLikeDislikeOffer = () => {
-    if (liked) {
-      handleDislikeOffer();
-      setLiked(false);
-      setDisliked(true);
-    } else if (disliked) {
-      handleLikeOffer();
-      setLiked(true);
-      setDisliked(false);
-    } else {
-      handleLikeOffer();
-      setLiked(true);
+    if (!offer) {
+        return <div>Loading...</div>;
     }
-  }
 
-const handleLikeOffer = async () => {
-    try {
-        await fetch(`${url}/like`, { method: 'PUT' });
-        setLiked(true);
-        setOffer({ ...offer, likes: offer.likes + 1 });
-    } catch (error) {
-        console.log("error", error);
-    }
-}
-
-const handleDislikeOffer = async () => {
-    try {
-        await fetch(`${url}/dislike`, { method: 'PUT' });
+    const handleLikeDislikeOffer = () => {
+        if (liked) {
+        handleDislikeOffer();
+        setLiked(false);
         setDisliked(true);
-        setOffer({ ...offer, likes: offer.likes - 1 });
-    } catch (error) {
-        console.log("error", error);
+        } else if (disliked) {
+        handleLikeOffer();
+        setLiked(true);
+        setDisliked(false);
+        } else {
+        handleLikeOffer();
+        setLiked(true);
+        }
     }
-}
+
+    const handleLikeOffer = async () => {
+        try {
+            await fetch(`${url}/like`, { method: 'PUT' });
+            setLiked(true);
+            setOffer({ ...offer, likes: offer.likes + 1 });
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
+
+    const handleDislikeOffer = async () => {
+        try {
+            await fetch(`${url}/dislike`, { method: 'PUT' });
+            setDisliked(true);
+            setOffer({ ...offer, likes: offer.likes - 1 });
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
 
   return(
     <div>
@@ -74,7 +77,7 @@ const handleDislikeOffer = async () => {
                     <h1 className="title">{offer.title}</h1>
                         <div className="rounded-top text-white d-flex flex-row">
                             <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
-                            {offer.image ? (
+                            { offer.image ? (
                             <ImageService data={offer} className="dream-image" />
                             ) : (
                             <img

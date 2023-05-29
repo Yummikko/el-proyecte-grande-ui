@@ -10,10 +10,15 @@ const AllDreams = () => {
   const [dreams, setDreams] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/v1/dreams/all')
-      .then(response => response.json())
-      .then(data => setDreams(data));
+    fetchData()
   }, []);
+
+  const fetchData = async () => { 
+    await fetch('http://localhost:8080/api/v1/dreams/all')
+    .then(response => response.json())
+    .then(data => setDreams(data));
+  }
+  
   return (
     <div>
       <Navbar/><br/><br/>
@@ -30,7 +35,7 @@ const AllDreams = () => {
         {dreams.map(dream => (
           <Link to={`/dream-details/${dream.id}`} key={dream.id} className="dream-item">
             <div className="dream-image-container">
-            {dream.image ? (
+            { typeof dream.image !== Number ? (
               <ImageService data={dream} className="dream-image" />
             ) : (
               <img

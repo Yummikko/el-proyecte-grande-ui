@@ -9,10 +9,14 @@ const OfferPage = () => {
   const [offer, setOffer] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/offers/all')
-      .then(response => response.json())
-      .then(data => setOffer(data));
+    fetchData()
   }, []);
+
+  const fetchData = async () => { 
+    await fetch('http://localhost:8080/api/offers/all')
+    .then(response => response.json())
+    .then(data => setOffer(data));
+  }
 
   return (
     <div>
