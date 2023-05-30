@@ -9,6 +9,7 @@ import { getCurrentUser } from "../../services/Oauth2Services"
 import ProfileService from "../../services/ProfileService";
 import Alert from "./Alert";
 import Tooltip from "../../common/Tooltip";
+import { ACCESS_TOKEN } from "../../constants";
 
 export default class Profile extends Component {
   
@@ -18,7 +19,7 @@ export default class Profile extends Component {
     this.myRef = React.createRef();
     this.state = {
       currentUser: null,
-      file: null,
+      file: null
     };
 
     this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
@@ -48,15 +49,20 @@ export default class Profile extends Component {
 
   componentDidMount() {
     let checkCurrentUser = AuthService.getCurrentUser();
+    if (checkCurrentUser) {
+      this.setState({
+        currentUser: checkCurrentUser,
+        ...this.state.file
+      });
+    }
 
     if(!checkCurrentUser)
       this.loadCurrentlyLoggedInUser();
     else
       this.setState({
         currentUser: checkCurrentUser,
-        ...this.state.file,
+        ...this.state.file
       });
-    
     
   }
 
@@ -94,9 +100,20 @@ export default class Profile extends Component {
     e.preventDefault();
     console.log(this.state)
     console.log(this.state.currentUser.id)
+    let accessToken = localStorage.getItem(ACCESS_TOKEN)
     ProfileService.updateUserImg(this.state.file, this.state.currentUser.id)
-    localStorage.removeItem("user")
+    .then( () => {
+      if (accessToken)
+        localStorage.removeItem("user")
+      else {
+        this.updateProfileImageId()
+      }
+    })
     this.refreshPage()
+  }
+
+  async updateProfileImageId() {
+    await this.updateUserImage()
   }
 
   async refreshPage() {
@@ -105,6 +122,14 @@ export default class Profile extends Component {
   }
 
   delay = ms => new Promise(res => setTimeout(res, ms));
+
+  async updateUserImage() {
+    let profileImageId = await AuthService.getCurrentUserImgId(this.state.currentUser.id);
+    let currentUser = JSON.parse(localStorage.getItem("user"))
+    currentUser.profilePictureId = profileImageId
+    localStorage.removeItem("user")
+    localStorage.setItem("user", JSON.stringify(currentUser))
+  }
 
   render() {
     if (this.state.redirect) {

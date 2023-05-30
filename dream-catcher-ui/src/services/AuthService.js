@@ -22,6 +22,7 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user");
+    localStorage.removeItem(ACCESS_TOKEN)
   }
 
   register(username, email, password, role) {
@@ -36,6 +37,14 @@ class AuthService {
 
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));
+  }
+
+  async getCurrentUserImgId(userId) {
+    return axios.get(API_BASE_URL + `/api/users/profile-auth/${userId}`)
+    .then(response => {
+      console.log(response.data)
+      return response.data;
+    })
   }
 
   getCurrentUserOauth2() {
