@@ -32,6 +32,7 @@ const DreamDetails = () => {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
+      window.scrollTo(0, 0)
       const fetchData = async () => {
           try {
               const response = await fetch(url);
@@ -42,7 +43,7 @@ const DreamDetails = () => {
           }
       };
       fetchData();
-  }, [id]);
+    }, [id]);
 
 
       useEffect(() => {
