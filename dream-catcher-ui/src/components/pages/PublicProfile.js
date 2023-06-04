@@ -6,6 +6,7 @@ import GoBackButton from "../buttons/GoBackButton";
 import "../../styles/Profile.css";
 import { Link } from 'react-router-dom';
 import AuthService from "../../services/AuthService";
+import AvatarService from "../../services/AvatarService";
 
 
 
@@ -82,16 +83,14 @@ const PublicProfile = () => {
       return null;
     };
   
-
-  
     return (
       <div className="container profile">
         <GoBackButton />
         <div className="profile-container">
           <div className="rounded-top text-white d-flex flex-row">
           <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
-          {dreamer.image ? (
-              <ImageService data={dreamer} className="user-photo" />
+          {dreamer.user ? (
+              <AvatarService data={dreamer.user.profilePicture.id} className="user-photo" />
             ) : (
               <img
                 src={defaultPhoto}
