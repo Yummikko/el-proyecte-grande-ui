@@ -177,6 +177,7 @@ export default class Profile extends Component {
                             <img
                               src={defaultPhoto}
                               className="rounded-circle"
+                              width="150"
                             />
                           </Tooltip> 
                           <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} />

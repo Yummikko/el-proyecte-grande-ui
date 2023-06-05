@@ -5,6 +5,7 @@ import defaultPhoto from '../../assets/images/profile.jpeg';
 import GoBackButton from "../buttons/GoBackButton";
 import "../../styles/Profile.css";
 import { Link } from 'react-router-dom';
+import AvatarService from "../../services/AvatarService";
 
 
 
@@ -18,61 +19,64 @@ const PublicProfile = () => {
   
 
     useEffect(() => {
-        fetch(mentorUrl)
+        fetchData()
+    }, [nickname]);
+
+    const fetchData = async () => {
+      await fetch(mentorUrl)
         .then(response => {
-          console.log(response);
+          console.log(response.json());
           return response.json();
         })
           .then(data => {setMentor(data)})
           .catch(error => console.log(error));
-      }, [nickname]);
+    }
 
-      useEffect(() => {
-        fetch(mentorUrl + '/offers')
-        .then(response => {
-          console.log(response);
-          return response.json();
-        })
-          .then(data => {setOffers(data)})
-          .catch(error => console.log(error));
-      }, []);
 
-      const handleFollowUnfollow = () => {
-        if (followed) {
-            handleUnfollow();
-          setFollowed(false);
-          setUnfollowed(true);
-        } else if (unfollowed) {
-            handleFollow();
-          setFollowed(true);
-          setUnfollowed(false);
-        } else {
-            handleFollow();
-          setFollowed(true);
-        }
+    useEffect(() => {
+      fetch(mentorUrl + '/offers')
+      .then(response => {
+        console.log(response);
+        return response.json();
+      })
+        .then(data => {setOffers(data)})
+        .catch(error => console.log(error));
+    }, []);
+
+    const handleFollowUnfollow = () => {
+      if (followed) {
+          handleUnfollow();
+        setFollowed(false);
+        setUnfollowed(true);
+      } else if (unfollowed) {
+          handleFollow();
+        setFollowed(true);
+        setUnfollowed(false);
+      } else {
+          handleFollow();
+        setFollowed(true);
       }
-
-    const handleFollow = async () => {
-        try {
-            await fetch(mentorUrl + '/follow', { method: 'PUT' });
-            setFollowed(true);
-            setMentor({ ...mentor, followers: mentor.followers + 1 });
-        } catch (error) {
-            console.log("error", error);
-        }
     }
 
-    const handleUnfollow = async () => {
-        try {
-            await fetch(mentorUrl + '/unfollow', { method: 'PUT' });
-            setUnfollowed(true);
-            setMentor({ ...mentor, followers: mentor.followers - 1 });
-        } catch (error) {
-            console.log("error", error);
-        }
-    }
+  const handleFollow = async () => {
+      try {
+          await fetch(mentorUrl + '/follow', { method: 'PUT' });
+          setFollowed(true);
+          setMentor({ ...mentor, followers: mentor.followers + 1 });
+      } catch (error) {
+          console.log("error", error);
+      }
+  }
 
-
+  const handleUnfollow = async () => {
+      try {
+          await fetch(mentorUrl + '/unfollow', { method: 'PUT' });
+          setUnfollowed(true);
+          setMentor({ ...mentor, followers: mentor.followers - 1 });
+      } catch (error) {
+          console.log("error", error);
+      }
+  }
   
     return (
       <div className="container profile">
@@ -80,8 +84,8 @@ const PublicProfile = () => {
         <div className="profile-container">
           <div className="rounded-top text-white d-flex flex-row">
           <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
-          {mentor.image ? (
-              <ImageService data={mentor} className="user-photo" />
+          {mentor.user ? (
+              <AvatarService data={mentor.user.profilePicture.id} className="user-photo" />
             ) : (
               <img
                 src={defaultPhoto}
