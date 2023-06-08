@@ -30,6 +30,8 @@ import AllMentors from "./components/sections/AllMentors";
 import ProfileTest from "./components/pages/Profile";
 import PaypalComponent from "./components/sections/PaypalComponent";
 import PaypalSuccess from "./components/sections/paypal/PayPalSuccess";
+import PaypalError from "./components/sections/paypal/PayPalError";
+import PaypalCancel from "./components/sections/paypal/PayPalCancel";
 
 class App extends Component {
 
@@ -64,6 +66,8 @@ class App extends Component {
             <Route path="/profile-update" element={<CardProfile />} />
             <Route path="/paypal-transfer/:id" element={<PaypalComponent />} />
             <Route path="/paypal-success" element={<PaypalSuccess />} />
+            <Route path="/paypal-error" element={<PaypalError />} />
+            <Route path="/paypal-cancel" element={<PaypalCancel />} />
           </Routes>
         </div>
 
