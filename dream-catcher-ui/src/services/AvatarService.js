@@ -25,10 +25,22 @@ const AvatarService = (props) => {
         fetchImageData()
 
     }, [props?.data]);
-
     return (
         <div className="g-2">
-            <Tooltip content="Upload new profile picture" direction="right">
+            { props.tooltip ? (
+                <Tooltip content="Upload new profile picture" direction="right">
+                    <div className="mb-2">
+                        { image
+                        ? <img src={`data:image/png;base64,${image}`}
+                        alt="first" className="avatar rounded-circle" />
+                        : <img src={defaultPhoto}
+                        alt="first" className="avatar rounded-circle" />
+                        }
+                    </div>
+                </Tooltip>
+                )
+                :
+                (
                 <div className="mb-2">
                     { image
                     ? <img src={`data:image/png;base64,${image}`}
@@ -37,7 +49,8 @@ const AvatarService = (props) => {
                     alt="first" className="avatar rounded-circle" />
                     }
                 </div>
-            </Tooltip>
+                )
+            }
         </div>
     )
 }

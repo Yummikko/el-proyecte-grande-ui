@@ -150,7 +150,7 @@ export default class Profile extends Component {
                     if (current.profilePictureId) {
                         return <form onSubmit={this.handleSubmit}>
                         <label htmlFor="photo-upload" className="custom-file-upload">
-                          <AvatarService data={current.profilePictureId} className=" rounded-circle"/>
+                          <AvatarService data={current.profilePictureId} className=" rounded-circle" tooltip="true"/>
                           <input className="profile-change" style={{display: 'none'}}  id="photo-upload" type="file" ref={this.myRef} onChange={this.photoUpload} data-toggle-bs="tooltip" title="Upload new image"/>
                         </label>
                         <button style={{display: 'none'}} className="submit-btn" type="submit"></button>
