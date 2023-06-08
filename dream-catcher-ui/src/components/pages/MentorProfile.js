@@ -22,11 +22,10 @@ const PublicProfile = () => {
         fetchData()
     }, [nickname]);
 
-    const fetchData = async () => {
-      await fetch(mentorUrl)
-        .then(response => {
-          console.log(response.json());
-          return response.json();
+    const fetchData = () => {
+        fetch(mentorUrl)
+        .then(resp => {
+          return resp.json();
         })
           .then(data => {setMentor(data)})
           .catch(error => console.log(error));
@@ -77,31 +76,31 @@ const PublicProfile = () => {
           console.log("error", error);
       }
   }
-  
-    return (
-      <div className="container profile">
-        <GoBackButton />
-        <div className="profile-container">
-          <div className="rounded-top text-white d-flex flex-row">
-          <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
-          {mentor.user ? (
-              <AvatarService data={mentor.user.profilePicture.id} className="user-photo" />
-            ) : (
-              <img
-                src={defaultPhoto}
-                className="user-photo"
-              /> 
-            )}
-            <br/><header><h3><strong>{mentor.username}</strong> </h3></header>
-              <h2>{mentor.nickname}</h2>
-              <p>Mentor</p>
-              <p>Followers: {mentor.followers}</p>
-              <button className="follow-btn" onClick={handleFollowUnfollow}>{followed ? 'Unfollow' : 'Follow'}</button><br/>
-            </div>
-          </div>
-        </div><br/>
 
-        <div className="dreams-grid">
+  return (
+    <div className="container profile">
+      <GoBackButton />
+      <div className="profile-container">
+        <div className="rounded-top text-white d-flex flex-row">
+        <div className="ms-4 mt-5 d-flex flex-column text-dark align-items-center">
+        {mentor.user ? (
+            <AvatarService data={mentor.user.profilePicture.id} className="user-photo" />
+          ) : (
+            <img
+              src={defaultPhoto}
+              className="user-photo"
+            /> 
+          )}
+          <br/><header><h3><strong>{mentor.username}</strong> </h3></header>
+            <h2>{mentor.nickname}</h2>
+            <p>Mentor</p>
+            <p>Followers: {mentor.followers}</p>
+            <button className="follow-btn" onClick={handleFollowUnfollow}>{followed ? 'Unfollow' : 'Follow'}</button><br/>
+          </div>
+        </div>
+      </div><br/>
+
+      <div className="dreams-grid pb-3">
         {offers.map(offer => (
           <Link to={`/dream-details/${offer.id}`} key={offer.id} className="dream-item">
             <div className="dream-image-container">
@@ -120,8 +119,8 @@ const PublicProfile = () => {
         ))}
       </div>
 
-      </div>
-    );
-  };
+  </div>
+  );
+};
   
-  export default PublicProfile;
+export default PublicProfile;

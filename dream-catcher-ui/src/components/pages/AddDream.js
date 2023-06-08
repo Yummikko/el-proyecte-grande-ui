@@ -61,6 +61,8 @@ const AddDream = () => {
         })
     }
 
+    
+
     function refreshPage() {
         window.location.reload(false);
     }
@@ -74,7 +76,7 @@ const AddDream = () => {
     return (
         <div>
     <Navbar/>
-        <div className='flex max-w-2xl mx-auto mt-5 shadow border-b pb-2'>
+        <div className='flex max-w-2xl mx-auto mt-5 shadow border-b pb-2 text-center'>
         
         {<div className='p-2'>
             <div className='font-thin text-2xl tracking-wider mt-3 mb-5' style={{fontSize: '25px', fontWeight: 'bold', fontFamily: 'Antic Didone' }}>

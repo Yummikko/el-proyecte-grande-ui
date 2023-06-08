@@ -56,19 +56,19 @@ render() {
   return (
     <div className="nav-wrapper">
       {<nav id="navbar" className="navbar container">
-          <div>
-          <div className="logo">
-            {/* Logo Placeholder for Illustration */}
-            <a href="/home" style={{ color: 'black', textDecoration: 'none' }}> <img className="me-5 pb-2" width="230" src={dreamLogo} /></a>
-          </div>
-          
-          <ul id="menu" style={{fontSize: '25px', fontWeight: 'bold', fontFamily: 'Antic Didone' }}>
-            <li className="nav-item">
-              <li><a href="/home">Home</a></li>
-              <li><a href="/all-dreams">Dreams</a></li>
-              <li><a href="/offer-page">Offers</a></li>  
-            </li>
-            </ul>
+          <div className="nav-elements">
+            <div className="logo">
+              {/* Logo Placeholder for Illustration */}
+              <a href="/home" style={{ color: 'black', textDecoration: 'none' }}> <img className="me-5 pb-2" width="230" src={dreamLogo} /></a>
+            </div>
+            
+            <ul id="menu" style={{fontSize: '25px', fontWeight: 'bold', fontFamily: 'Antic Didone' }}>
+              <li className="nav-item">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/all-dreams">Dreams</a></li>
+                <li><a href="/offer-page">Offers</a></li>  
+              </li>
+              </ul>
                          
 
             {showModeratorBoard && (
@@ -101,7 +101,8 @@ render() {
 
                 <Dropdown.Menu>
                   <Dropdown.Item href="/profile">{currentUser.username}</Dropdown.Item>
-                  <Dropdown.Item href="/add-dream">Add Dream</Dropdown.Item>
+                  {!showModeratorBoard && <Dropdown.Item href="/add-dream">Add Dream</Dropdown.Item>}
+                  {showModeratorBoard && <Dropdown.Item><Link to={`/add-offer/${currentUser.id}`} style={{ color: 'black', textDecoration: 'none' }}>Add Offer</Link></Dropdown.Item>}
                   <Dropdown.Item href="/login" onClick={this.logOut}>Log Out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

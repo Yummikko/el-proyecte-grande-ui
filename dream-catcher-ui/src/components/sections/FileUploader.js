@@ -1,7 +1,12 @@
-import React, {useRef} from 'react'
+import React, {useState, useRef} from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
+import "../../styles/ImageUpload.css"
 
 const FileUploader = ({onFileSelectError, onFileSelectSuccess}) => {
     const fileInput = useRef(null)
+
+    const [image, setImage] = useState({ preview: ""});
 
 
     const handleFileInput = (e) => {
@@ -13,13 +18,31 @@ const FileUploader = ({onFileSelectError, onFileSelectSuccess}) => {
         else {
             fileInput.current && fileInput.current.click()
             onFileSelectSuccess(file);
+            setImage({
+                preview: URL.createObjectURL(e.target.files[0])
+            });
         }
       };
 
     return (
         <div className="mb-3">
-            <label for="formFile" className="form-label">Add Image</label>
-            <input className="form-control w-25" name="image" type="file" id="formFile" onChange={handleFileInput} />
+            <label htmlFor="upload-button">
+                {image.preview ? (
+                    <img src={image.preview} alt="preview" className="mt-3 w-25 rounded" />
+                    ) : (
+                    <>
+                        <FontAwesomeIcon className="mt-3 h1 fa-image" icon={faImage} />
+                        <p>Upload image</p>
+                    </>
+                )}
+            </label>
+            <input
+                name="image"
+                type="file"
+                id="upload-button"
+                style={{ display: "none" }}
+                onChange={handleFileInput}
+            />
         </div>
     )
 }

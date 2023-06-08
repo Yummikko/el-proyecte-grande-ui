@@ -30,8 +30,8 @@ const OfferPage = () => {
             <div class="loader"></div>
           </div>
       } 
-      <div className="dreams-grid">
-        {offer.map((offer) => (
+      <div className="dreams-grid mb-3">
+        {offer && offer.map((offer) => (
           <Link to={`/offer-details/${offer.id}`} key={offer.id} className="dream-item">
             <div className="dream-image-container">
             {offer.image ? (
@@ -39,7 +39,7 @@ const OfferPage = () => {
             ) : (
               <img
                 src={defaultPhoto}
-                alt="dream"
+                alt="offer"
                 className="dream-image"
               />
             )}

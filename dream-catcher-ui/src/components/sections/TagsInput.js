@@ -30,8 +30,8 @@ function TagsInput({setTagsData}){
     }, [tags])
 
     return (
-        <div>
-            <p>Enter hashtags for this Dream:</p>
+        <div className='items-center'>
+            <label className='mt-1 mb-2'>Enter hashtags for this Dream:</label>
             <div className="tags-input-container">
                 { tags.map((tag, index) => (
                     <div className="tag-item" key={index}>

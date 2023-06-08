@@ -33,7 +33,7 @@ const Dreams = () => {
       <div className="dreams-container">
         <div className="dreams-line"></div>
         <div className="dreams">
-        {dreams.map((dream, index) => (
+        {dreams && dreams.map((dream, index) => (
         <div className="dream" key={index}>
         <div className="dream-photo">
         {dream.image ? (
