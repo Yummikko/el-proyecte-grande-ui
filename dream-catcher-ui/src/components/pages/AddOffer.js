@@ -59,6 +59,11 @@ const AddOffer = () => {
         })
     }
 
+    const resetForm = () => {
+        // 👇️ clear input value
+        refreshPage()
+    };
+
     function refreshPage() {
         window.location.reload(false);
     }
@@ -111,7 +116,7 @@ const AddOffer = () => {
           onFileSelectError={({ error }) => alert(error)} />
             <div className='items-center justify-center h-14 w-full my-4'>
                 <button onClick={saveOffer} className='btn btn-primary mb-3'>Add</button>
-                <button className='btn btn-danger mb-3 ms-1'>Clear</button>
+                <button onClick={resetForm} className='btn btn-danger mb-3 ms-1'>Clear</button>
             </div>
         </div>}
         {data && (

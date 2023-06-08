@@ -61,7 +61,10 @@ const AddDream = () => {
         })
     }
 
-    
+    const resetForm = () => {
+        // 👇️ clear input value
+        refreshPage()
+    };
 
     function refreshPage() {
         window.location.reload(false);
@@ -75,7 +78,7 @@ const AddDream = () => {
 
     return (
         <div>
-    <Navbar/>
+        <Navbar/>
         <div className='flex max-w-2xl mx-auto mt-5 shadow border-b pb-2 text-center'>
         
         {<div className='p-2'>
@@ -95,7 +98,7 @@ const AddDream = () => {
           onFileSelectError={({ error }) => alert(error)} />
             <div className='items-center justify-center h-14 w-full my-4'>
                 <button onClick={saveDream} className='btn btn-primary mb-3'>Add</button>
-                <button className='btn btn-danger mb-3 ms-1'>Clear</button>
+                <button onClick={resetForm} className='btn btn-danger mb-3 ms-1'>Clear</button>
             </div>
         </div>}
         {data && (
