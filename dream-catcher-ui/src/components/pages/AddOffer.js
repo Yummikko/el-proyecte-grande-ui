@@ -76,8 +76,8 @@ const AddOffer = () => {
 
     return (
         <div>
-    <Navbar/>
-        <div className='flex max-w-2xl mx-auto shadow border-b pb-2 text-center'>
+    <Navbar />
+        <div className='flex max-w-2xl mx-auto shadow border-b pb-2 text-center mt-5 mb-5'>
         
         {<div className='p-2'>
             <div className='font-thin text-2xl tracking-wider mt-5 mb-2'>

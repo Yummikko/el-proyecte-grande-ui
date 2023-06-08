@@ -203,7 +203,7 @@ export default class Register extends Component {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group mb-2">
                   <label htmlFor="role">Role</label>
                   <Select className="form-select"
                     name="role"
