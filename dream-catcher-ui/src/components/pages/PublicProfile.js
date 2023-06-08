@@ -7,6 +7,8 @@ import "../../styles/Profile.css";
 import { Link } from 'react-router-dom';
 import AuthService from "../../services/AuthService";
 import AvatarService from "../../services/AvatarService";
+import axios from 'axios';
+import { ACCESS_TOKEN } from "../../constants";
 
 
 
@@ -55,9 +57,25 @@ const PublicProfile = () => {
       }
     }
 
+  const user = JSON.parse(localStorage.getItem('user'))
+  const accessToken = localStorage.getItem("accessToken")
+  let config = {};
+  if (!user.accessToken)
+    config = {
+      headers: {
+          Authorization: `Bearer ${accessToken}`,
+      }
+    }
+  else
+    config = {
+      headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+      }
+    }
+
   const handleFollow = async () => {
       try {
-          await fetch(dreamerUrl + '/follow', { method: 'PUT' });
+          await axios.put(dreamerUrl + '/follow', {}, config);
           setFollowed(true);
           setDreamer({ ...dreamer, followers: dreamer.followers + 1 });
       } catch (error) {
@@ -67,7 +85,7 @@ const PublicProfile = () => {
 
   const handleUnfollow = async () => {
       try {
-          await fetch(dreamerUrl + '/unfollow', { method: 'PUT' });
+          await fetch(dreamerUrl + '/unfollow', {}, config);
           setUnfollowed(true);
           setDreamer({ ...dreamer, followers: dreamer.followers - 1 });
       } catch (error) {
@@ -101,7 +119,7 @@ const PublicProfile = () => {
             <h2>{dreamer.nickname}</h2>
             <p>Dreamer</p>
             <p>Followers: {dreamer.followers}</p>
-            <button className="follow-btn" onClick={handleFollowUnfollow}>FOLLOW</button><br/>
+            <button className="follow-btn" onClick={handleFollowUnfollow}>{followed ? 'Unfollow' : 'Follow'}</button><br/>
           </div>
         </div>
       </div><br/>
